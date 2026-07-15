@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رحلات الأفق السياحية | تجربة السفر الفاخرة</title>
+    
+    <!-- Google Fonts - Cairo & Tajawal -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Swiper CSS CDN for Premium Carousels -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#fbf8eb',
+                            100: '#f4ebb9',
+                            200: '#ecd983',
+                            300: '#e1bf4c',
+                            400: '#d7a627',
+                            500: '#c5a880', // Premium Gold
+                            600: '#b08f5c',
+                            700: '#917042',
+                            800: '#755835',
+                            900: '#61482e',
+                            950: '#3a291a',
+                        },
+                        luxuryDark: {
+                            50: '#f4f5f6',
+                            900: '#0b0f19', // Rich Space Dark
+                            950: '#070a10',
+                        }
+                    },
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Premium CSS Effects */
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dark .glassmorphism {
+            background: rgba(11, 15, 25, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .dark .glass-card {
+            background: rgba(22, 29, 48, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .text-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #c5a880 50%, #aa882c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Smooth custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c5a880;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b08f5c;
+        }
+
+        /* Swiper modifications */
+        .swiper-pagination-bullet-active {
+            background: #c5a880 !important;
+            width: 24px !important;
+            border-radius: 4px !important;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="bg-amber-50/20 text-slate-800 dark:bg-luxuryDark-950 dark:text-slate-100 transition-colors duration-500 font-cairo overflow-x-hidden">
+
+    <!-- Loader (شاشة التحميل الاحترافية) -->
+    <div id="loader" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-luxuryDark-950 transition-all duration-1000">
+        <div class="relative flex items-center justify-center">
+            <!-- Outer glowing circle -->
+            <div class="w-28 h-28 border-2 border-gold-500/20 border-t-gold-500 rounded-full animate-spin"></div>
+            <!-- Inner rotating compass rose -->
+            <div class="absolute w-16 h-16 flex items-center justify-center text-gold-500 animate-pulse">
+                <i class="fa-solid fa-compass text-4xl"></i>
+            </div>
+        </div>
+        <h2 class="mt-6 text-2xl font-tajawal font-bold text-gradient tracking-widest">رحلات الأفق</h2>
+        <p class="text-gray-400 text-sm mt-2 font-light">بوابتك لعالم من الفخامة والاستكشاف...</p>
+        <div class="w-48 bg-gray-800 h-1 rounded-full mt-4 overflow-hidden">
+            <div class="bg-gold-500 h-full w-0 transition-all duration-700" id="loader-progress"></div>
+        </div>
+    </div>
+
+    <!-- Sticky Header & Navigation -->
+    <header id="main-nav" class="fixed top-0 left-0 w-full z-40 transition-all duration-500 glassmorphism shadow-md py-4">
+        <div class="container mx-auto px-6 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-gold-600 to-gold-400 flex items-center justify-center shadow-lg group-hover:rotate-12 transition-transform duration-500">
+                    <i class="fa-solid fa-plane-departure text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold font-tajawal tracking-tight text-slate-900 dark:text-white group-hover:text-gold-500 transition-colors duration-300">أفق السياحة</h1>
+                    <p class="text-[10px] text-gold-600 dark:text-gold-400 font-light -mt-1 tracking-wider">HORIZON TRAVELS</p>
+                </div>
+            </a>
+
+            <!-- Main Navigation Desktop Links -->
+            <nav class="hidden lg:flex items-center gap-8 font-medium text-sm">
+                <a href="#hero" class="hover:text-gold-500 transition-colors duration-300 relative group py-2">الرئيسية<span class="absolute bottom-0 right-0 w-0 h-[2px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="#about" class="hover:text-gold-500 transition-colors duration-300 relative group py-2">من نحن<span class="absolute bottom-0 right-0 w-0 h-[2px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="#services" class="hover:text-gold-500 transition-colors duration-300 relative group py-2">خدماتنا<span class="absolute bottom-0 right-0 w-0 h-[2px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="#tours" class="hover:text-gold-500 transition-colors duration-300 relative group py-2">رحلاتنا<span class="absolute bottom-0 right-0 w-0 h-[2px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="#offers" class="hover:text-gold-500 transition-colors duration-300 relative group py-2">العروض<span class="absolute bottom-0 right-0 w-0 h-[2px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="#gallery" class="hover:text-gold-500 transition-colors duration-300 relative group py-2">المعرض<span class="absolute bottom-0 right-0 w-0 h-[2px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="#faq" class="hover:text-gold-500 transition-colors duration-300 relative group py-2">الأسئلة الشائعة<span class="absolute bottom-0 right-0 w-0 h-[2px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span></a>
+                <a href="#contact" class="hover:text-gold-500 transition-colors duration-300 relative group py-2">اتصل بنا<span class="absolute bottom-0 right-0 w-0 h-[2px] bg-gold-500 transition-all duration-300 group-hover:w-full"></span></a>
+            </nav>
+
+            <!-- Control Actions (Theme Toggle & CTA) -->
+            <div class="hidden lg:flex items-center gap-4">
+                <!-- Theme switch button -->
+                <button id="theme-toggle" class="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-400 hover:scale-110 transition-all duration-300 shadow" aria-label="تبديل المظهر">
+                    <i id="theme-toggle-icon" class="fa-solid fa-moon text-lg"></i>
+                </button>
+                
+                <a href="#booking" class="px-6 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white font-semibold text-sm rounded-full shadow-lg hover:shadow-gold-500/30 hover:scale-105 active:scale-95 transition-all duration-300">
+                    <i class="fa-regular fa-calendar-check ml-2"></i>احجز رحلتك
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <div class="flex items-center gap-3 lg:hidden">
+                <button id="mobile-theme-toggle" class="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-amber-400 shadow">
+                    <i id="mobile-theme-toggle-icon" class="fa-solid fa-moon"></i>
+                </button>
+                <button id="mobile-menu-btn" class="text-slate-900 dark:text-white p-2 focus:outline-none" aria-label="القائمة">
+                    <i class="fa-solid fa-bars-staggered text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="fixed inset-y-0 right-0 w-72 bg-white dark:bg-luxuryDark-900 shadow-2xl z-50 transform translate-x-full transition-transform duration-500 ease-in-out lg:hidden">
+            <div class="p-6 flex flex-col h-full justify-between">
+                <div>
+                    <div class="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 pb-4 mb-6">
+                        <span class="text-lg font-bold text-gradient">رحلات الأفق</span>
+                        <button id="close-menu-btn" class="text-gray-500 hover:text-red-500 transition-colors">
+                            <i class="fa-solid fa-xmark text-2xl"></i>
+                        </button>
+                    </div>
+                    <nav class="flex flex-col gap-4 text-base font-semibold">
+                        <a href="#hero" class="mobile-nav-link py-2 hover:text-gold-500">الرئيسية</a>
+                        <a href="#about" class="mobile-nav-link py-2 hover:text-gold-500">من نحن</a>
+                        <a href="#services" class="mobile-nav-link py-2 hover:text-gold-500">خدماتنا</a>
+                        <a href="#tours" class="mobile-nav-link py-2 hover:text-gold-500">رحلاتنا</a>
+                        <a href="#offers" class="mobile-nav-link py-2 hover:text-gold-500">العروض والمفاجآت</a>
+                        <a href="#gallery" class="mobile-nav-link py-2 hover:text-gold-500">معرض الصور</a>
+                        <a href="#faq" class="mobile-nav-link py-2 hover:text-gold-500">الأسئلة الشائعة</a>
+                        <a href="#contact" class="mobile-nav-link py-2 hover:text-gold-500">اتصل بنا</a>
+                    </nav>
+                </div>
+                <div>
+                    <a href="#booking" class="mobile-nav-link block w-full py-3 text-center bg-gradient-to-r from-gold-600 to-gold-400 text-white rounded-xl shadow-md font-bold mb-4">
+                        احجز الآن
+                    </a>
+                    <div class="text-center text-xs text-gray-500">مقرنا عجلون، الأردن © 2026</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Banner Section with Parallax Backdrop -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Parallax Background Image -->
+        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105" 
+             style="background-image: url('https://images.unsplash.com/photo-1548711509-813c9e6db3b6?q=80&w=1920');">
+            <!-- Luxury dark radial overlay -->
+            <div class="absolute inset-0 bg-gradient-to-t from-luxuryDark-950 via-slate-950/75 to-transparent"></div>
+        </div>
+
+        <!-- Flying Dust Particles Animation / Decorative Elements -->
+        <div class="absolute inset-0 pointer-events-none opacity-40 mix-blend-screen">
+            <div class="absolute top-10 left-10 w-2 h-2 bg-gold-400 rounded-full animate-pulse-slow"></div>
+            <div class="absolute bottom-1/4 right-12 w-3 h-3 bg-gold-300 rounded-full animate-pulse"></div>
+            <div class="absolute top-1/3 right-1/4 w-1.5 h-1.5 bg-white rounded-full animate-ping"></div>
+        </div>
+
+        <!-- Content Container -->
+        <div class="container mx-auto px-6 relative z-10 text-center py-20 mt-10">
+            <!-- Badge -->
+            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glassmorphism text-gold-400 text-xs font-semibold uppercase tracking-wider mb-6 animate-bounce">
+                <i class="fa-solid fa-crown text-amber-400"></i> خبيرك المعتمد للسفر الفاخر من عجلون لكل العالم
+            </span>
+
+            <!-- Main Heading -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-bold font-tajawal tracking-tight text-white mb-6 leading-tight">
+                استكشف عظمة التاريخ وجمال الطبيعة <br>
+                مع <span class="text-gradient">رحلات الأفق</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="text-lg sm:text-xl text-gray-200 font-light max-w-3xl mx-auto mb-10 leading-relaxed">
+                من قلاع عجلون الخضراء الشامخة إلى أعماق البتراء الوردية ورمال وادي رم الساحرة. نأخذك في رحلات صممت خصيصاً لتفوق توقعاتك بمعايير فندقية وخدمات VIP.
+            </p>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#booking" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 text-white font-bold rounded-xl shadow-2xl shadow-gold-500/20 hover:scale-105 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 text-lg">
+                    <i class="fa-solid fa-map-location-dot ml-2"></i>ابدأ حجزك الآن
+                </a>
+                <a href="#tours" class="w-full sm:w-auto px-8 py-4 glassmorphism text-white border border-white/20 font-semibold rounded-xl hover:bg-white/10 hover:border-white/40 hover:-translate-y-0.5 active:scale-95 transition-all duration-300 text-lg">
+                    <i class="fa-regular fa-compass ml-2 animate-spin-slow"></i>استكشف الرحلات
+                </a>
+            </div>
+        </div>
+
+        <!-- Animated Scroll Down Indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/60 hover:text-gold-400 transition-colors duration-300 pointer-events-auto">
+            <a href="#about" aria-label="الانتقال للأسفل">
+                <span class="text-xs uppercase tracking-widest font-light">انزل للأسفل</span>
+                <div class="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1 mt-2">
+                    <div class="w-1.5 h-3 bg-gold-400 rounded-full animate-bounce"></div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Statistics / Counters Grid Section -->
+    <section class="py-12 bg-white/50 dark:bg-luxuryDark-900 border-y border-gray-100 dark:border-gray-800">
+        <div class="container mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Stat Item 1 -->
+            <div class="text-center">
+                <div class="text-3xl sm:text-4xl font-black text-gold-500 font-tajawal mb-2" data-target="15000">+<span class="counter">0</span></div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">عميل سعيد بخدماتنا</p>
+            </div>
+            <!-- Stat Item 2 -->
+            <div class="text-center">
+                <div class="text-3xl sm:text-4xl font-black text-gold-500 font-tajawal mb-2" data-target="120">+<span class="counter">0</span></div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">وجهة سياحية حول العالم</p>
+            </div>
+            <!-- Stat Item 3 -->
+            <div class="text-center">
+                <div class="text-3xl sm:text-4xl font-black text-gold-500 font-tajawal mb-2" data-target="15">+<span class="counter">0</span></div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">عام من الخبرة والتميز</p>
+            </div>
+            <!-- Stat Item 4 -->
+            <div class="text-center">
+                <div class="text-3xl sm:text-4xl font-black text-gold-500 font-tajawal mb-2" data-target="99">%<span class="counter">0</span></div>
+                <p class="text-sm text-gray-500 dark:text-gray-400 font-medium">نسبة الرضا والتقييم الإيجابي</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us Section (من نحن) -->
+    <section id="about" class="py-24 relative overflow-hidden reveal">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Image Showcase -->
+                <div class="relative group">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-gold-500 to-transparent opacity-20 rounded-3xl blur-2xl"></div>
+                    <!-- Main image (Ajloun green hills) -->
+                    <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?q=80&w=1200" alt="طبيعة عجلون الساحرة" class="rounded-3xl shadow-2xl object-cover w-full h-[450px] relative z-10 border border-white/10 group-hover:scale-[1.02] transition-transform duration-500">
+                    <!-- Overlay Glass Card -->
+                    <div class="absolute -bottom-6 -right-6 lg:bottom-10 lg:-right-10 z-20 glassmorphism p-6 rounded-2xl border border-white/20 max-w-xs shadow-xl">
+                        <i class="fa-solid fa-quote-right text-gold-400 text-3xl mb-2"></i>
+                        <p class="text-sm text-gray-200 font-light leading-relaxed">
+                            "تأسست شركتنا في قلب عجلون الخضراء لننقل جمال الأردن وعبق تاريخه لكل مسافر يبحث عن عطلة لا تُنسى."
+                        </p>
+                        <h4 class="mt-3 text-gold-500 font-bold text-xs text-left">- إدارة الأفق السياحي</h4>
+                    </div>
+                </div>
+
+                <!-- Right Narrative Content -->
+                <div class="space-y-6">
+                    <span class="text-gold-500 font-bold tracking-widest text-sm uppercase flex items-center gap-2">
+                        <span class="w-8 h-[1px] bg-gold-500 inline-block"></span> أصالة وجودة عالمية
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-tajawal text-slate-900 dark:text-white">
+                        رحلات الأفق السياحية <br>
+                        <span class="text-gradient">قصة شغف بالاستكشاف والرفاهية</span>
+                    </h2>
+                    <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        نحن شركة رائدة في تخطيط وتقديم الرحلات السياحية الشاملة ومقرنا الرئيسي في مدينة عجلون، منارة التاريخ الطبيعي والأثري في الأردن. نجمع بين السحر العربي والضيافة الهاشمية الأصيلة مع أرقى معايير التنظيم واللوجستيات العالمية لتنعم برحلة فاخرة خالية من المتاعب.
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gold-500/10 text-gold-500 flex items-center justify-center">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">أمان وسلامة كاملة</h4>
+                                <p class="text-xs text-gray-400">تأمين رحلات وترخيص حكومي</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-lg bg-gold-500/10 text-gold-500 flex items-center justify-center">
+                                <i class="fa-solid fa-gem"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">خدمات VIP فاخرة</h4>
+                                <p class="text-xs text-gray-400">تنقلات حديثة وفنادق فخمة</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-6">
+                        <a href="#tours" class="inline-flex items-center gap-2 px-6 py-3 bg-slate-950 dark:bg-white text-white dark:text-slate-950 font-bold rounded-xl shadow-lg hover:bg-gold-500 dark:hover:bg-gold-500 dark:hover:text-white transition-colors duration-300">
+                            استكشف باقتنا المتنوعة <i class="fa-solid fa-arrow-left"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section (خدماتنا) -->
+    <section id="services" class="py-24 bg-slate-50 dark:bg-luxuryDark-900/60 reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold-500 font-bold text-sm uppercase tracking-wider">ماذا نقدم لعملائنا النخبة</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-tajawal mt-2 text-slate-900 dark:text-white">خدمات راقية متكاملة لتفاصيل مريحة</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-3">نحرص على صياغة أدق تفاصيل رحلتكم لتكون تجربة مفعمة بالراحة والاسترخاء والدهشة.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl group hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-xl bg-gold-100 dark:bg-gold-900/20 text-gold-500 flex items-center justify-center mb-6 group-hover:bg-gold-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-hotel text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3 group-hover:text-gold-500 transition-colors duration-300">فنادق ومنتجعات فاخرة</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">إقامات منتقاة بعناية فائقة حاصلة على أعلى التقييمات وذات إطلالات مذهلة.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl group hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-xl bg-gold-100 dark:bg-gold-900/20 text-gold-500 flex items-center justify-center mb-6 group-hover:bg-gold-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-bus text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3 group-hover:text-gold-500 transition-colors duration-300">مواصلات VIP حديثة</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">أسطول سيارات وحافلات فارهة ومكيفة مع سائقين مدربين ومهنيين ذوي خبرة.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl group hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-xl bg-gold-100 dark:bg-gold-900/20 text-gold-500 flex items-center justify-center mb-6 group-hover:bg-gold-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-route text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3 group-hover:text-gold-500 transition-colors duration-300">مرشدون محترفون</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">مرشدون مؤهلون يحدثونكم بلغات متعددة عن ثنايا وحضارة وتاريخ المعالم العريقة.</p>
+                </div>
+                <!-- Card 4 -->
+                <div class="glass-card p-8 rounded-2xl group hover:-translate-y-2">
+                    <div class="w-14 h-14 rounded-xl bg-gold-100 dark:bg-gold-900/20 text-gold-500 flex items-center justify-center mb-6 group-hover:bg-gold-500 group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-headset text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-3 group-hover:text-gold-500 transition-colors duration-300">دعم متواصل 24/7</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">فريق دعم متأهب دائمًا لمرافقتكم وحل أي طلبات طارئة على مدار الساعة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tours Grid Section (نظام باقات الرحلات) -->
+    <section id="tours" class="py-24 reveal">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-gold-500 font-bold text-sm uppercase">رحلات استثنائية منسقة بدقة</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold font-tajawal mt-2 text-slate-900 dark:text-white">باقاتنا السياحية الفاخرة</h2>
+                </div>
+                <!-- Filtering Tabs -->
+                <div class="flex flex-wrap gap-2" id="tours-filter">
+                    <button data-filter="all" class="tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-gold-500 text-white shadow-lg">كل الوجهات</button>
+                    <button data-filter="domestic" class="tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-gray-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300">رحلات داخلية (الأردن)</button>
+                    <button data-filter="intl" class="tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-gray-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300">رحلات خارجية عالمية</button>
+                    <button data-filter="adventure" class="tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-gray-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300">رحلات المغامرة والعائلات</button>
+                </div>
+            </div>
+
+            <!-- Tours Grid Container -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="tours-container">
+                <!-- Tour 1 (Ajloun) -->
+                <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic, adventure">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?q=80&w=800" alt="قلعة عجلون ومحمية الغابات" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلات اليوم الواحد</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                        <div class="absolute bottom-4 right-4 text-white">
+                            <span class="text-xs text-amber-300"><i class="fa-solid fa-star"></i> 4.9 (1,200 تقييم)</span>
+                            <h3 class="text-lg font-bold font-tajawal mt-1">جولة عجلون ومحمية الغابات</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">انغمس في غابات عجلون الخضراء الكثيفة مع زيارة قلعة عجلون التاريخية الأثرية وغداء ريفي أصيل.</p>
+                        <div class="flex items-center justify-between text-xs border-y border-gray-100 dark:border-gray-800 py-3">
+                            <span><i class="fa-regular fa-clock ml-1 text-gold-500"></i> يوم كامل</span>
+                            <span><i class="fa-solid fa-bowl-food ml-1 text-gold-500"></i> غداء + تنقلات VIP</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-xs text-gray-400 block">السعر للشخص</span>
+                                <span class="text-xl font-bold text-gold-500">35 دينار أردني</span>
+                            </div>
+                            <button onclick="prefillBooking('جولة عجلون ومحمية الغابات - 35 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tour 2 (Jerash) -->
+                <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1548711509-813c9e6db3b6?q=80&w=800" alt="مدينة جرش الأثرية" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلات اليوم الواحد</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                        <div class="absolute bottom-4 right-4 text-white">
+                            <span class="text-xs text-amber-300"><i class="fa-solid fa-star"></i> 4.8 (950 تقييم)</span>
+                            <h3 class="text-lg font-bold font-tajawal mt-1">جرش والمدينة الأثرية</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">استكشف ساحة البيضاوي وأعمدة جرش المذهلة الشامخة، واطلع على ملامح مدينة بومباي الشرقية.</p>
+                        <div class="flex items-center justify-between text-xs border-y border-gray-100 dark:border-gray-800 py-3">
+                            <span><i class="fa-regular fa-clock ml-1 text-gold-500"></i> يوم كامل</span>
+                            <span><i class="fa-solid fa-ticket ml-1 text-gold-500"></i> شامل التذاكر + المرشد</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-xs text-gray-400 block">السعر للشخص</span>
+                                <span class="text-xl font-bold text-gold-500">40 دينار أردني</span>
+                            </div>
+                            <button onclick="prefillBooking('جرش والمدينة الأثرية - 40 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tour 3 (Dead Sea) -->
+                <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic, adventure">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?q=80&w=800" alt="البحر الميت" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">الاستجمام والصحة</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                        <div class="absolute bottom-4 right-4 text-white">
+                            <span class="text-xs text-amber-300"><i class="fa-solid fa-star"></i> 4.9 (2,100 تقييم)</span>
+                            <h3 class="text-lg font-bold font-tajawal mt-1">البحر الميت والاستجمام الطبيعي</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">اقضِ يوماً لا ينسى في أدنى بقعة في العالم، مياه مشبعة بالأملاح المعدنية الصحية وغداء في منتجع 5 نجوم.</p>
+                        <div class="flex items-center justify-between text-xs border-y border-gray-100 dark:border-gray-800 py-3">
+                            <span><i class="fa-regular fa-clock ml-1 text-gold-500"></i> يوم كامل</span>
+                            <span><i class="fa-solid fa-hotel ml-1 text-gold-500"></i> دخول المنتجع والبركة</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-xs text-gray-400 block">السعر للشخص</span>
+                                <span class="text-xl font-bold text-gold-500">55 دينار أردني</span>
+                            </div>
+                            <button onclick="prefillBooking('البحر الميت والاستجمام - 55 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tour 4 (Petra) -->
+                <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?q=80&w=800" alt="البتراء المدينة الوردية" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلة كلاسيكية فاخرة</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                        <div class="absolute bottom-4 right-4 text-white">
+                            <span class="text-xs text-amber-300"><i class="fa-solid fa-star"></i> 5.0 (3,500 تقييم)</span>
+                            <h3 class="text-lg font-bold font-tajawal mt-1">البتراء: رحلة المدينة الوردية</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">استكشف أحد عجائب الدنيا السبع عبر السيق والوصول إلى الخزنة والمذبح في مغامرة أثرية فاخرة.</p>
+                        <div class="flex items-center justify-between text-xs border-y border-gray-100 dark:border-gray-800 py-3">
+                            <span><i class="fa-regular fa-clock ml-1 text-gold-500"></i> يوم كامل</span>
+                            <span><i class="fa-solid fa-map-location-dot ml-1 text-gold-500"></i> إرشاد محترف + سيارة VIP</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-xs text-gray-400 block">السعر للشخص</span>
+                                <span class="text-xl font-bold text-gold-500">95 دينار أردني</span>
+                            </div>
+                            <button onclick="prefillBooking('البتراء المدينة الوردية - 95 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tour 5 (Wadi Rum) -->
+                <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic, adventure">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?q=80&w=800" alt="وادي رم" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-rose-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">سياحة تخييم ومغامرة</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                        <div class="absolute bottom-4 right-4 text-white">
+                            <span class="text-xs text-amber-300"><i class="fa-solid fa-star"></i> 4.9 (4,200 تقييم)</span>
+                            <h3 class="text-lg font-bold font-tajawal mt-1">وادي رم: تجربة تخييم المريخ</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">انغمس في رمال الصحراء الحمراء مع ليلة تخييم في مخيمات فقاعية فاخرة وجولات سيارات دفع رباعي ومراقبة النجوم.</p>
+                        <div class="flex items-center justify-between text-xs border-y border-gray-100 dark:border-gray-800 py-3">
+                            <span><i class="fa-regular fa-clock ml-1 text-gold-500"></i> يومان / ليلة</span>
+                            <span><i class="fa-solid fa-cloud-moon ml-1 text-gold-500"></i> خيمة فاخرة + عشاء زرب</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-xs text-gray-400 block">السعر للشخص</span>
+                                <span class="text-xl font-bold text-gold-500">85 دينار أردني</span>
+                            </div>
+                            <button onclick="prefillBooking('وادي رم: تخييم المريخ - 85 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tour 6 (Aqaba) -->
+                <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic, adventure">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=800" alt="خليج العقبة الأردن" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-teal-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">البحر والغوص</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                        <div class="absolute bottom-4 right-4 text-white">
+                            <span class="text-xs text-amber-300"><i class="fa-solid fa-star"></i> 4.7 (1,800 تقييم)</span>
+                            <h3 class="text-lg font-bold font-tajawal mt-1">العقبة: ثغرة الأردن الباسمة</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">استمتع بشواطئ البحر الأحمر الدافئة، والسباحة والغطس لمشاهدة الشعاب المرجانية الساحرة والرحلات البحرية بمركب زجاجي.</p>
+                        <div class="flex items-center justify-between text-xs border-y border-gray-100 dark:border-gray-800 py-3">
+                            <span><i class="fa-regular fa-clock ml-1 text-gold-500"></i> يومان / ليلة</span>
+                            <span><i class="fa-solid fa-ship ml-1 text-gold-500"></i> جولة بحرية + إفطار مجاني</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-xs text-gray-400 block">السعر للشخص</span>
+                                <span class="text-xl font-bold text-gold-500">75 دينار أردني</span>
+                            </div>
+                            <button onclick="prefillBooking('العقبة والبحر الأحمر - 75 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tour 7 (Turkey) -->
+                <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="intl">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=800" alt="إسطنبول تركيا" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-violet-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلات دولية VIP</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                        <div class="absolute bottom-4 right-4 text-white">
+                            <span class="text-xs text-amber-300"><i class="fa-solid fa-star"></i> 4.9 (5,200 تقييم)</span>
+                            <h3 class="text-lg font-bold font-tajawal mt-1">سحر إسطنبول وبورصة</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">اكتشف معالم البوسفور وقصر توبكابي، والتمتع بالطبيعة الخلابة والتسوق في أشهر الأسواق التركية العريقة.</p>
+                        <div class="flex items-center justify-between text-xs border-y border-gray-100 dark:border-gray-800 py-3">
+                            <span><i class="fa-regular fa-clock ml-1 text-gold-500"></i> 6 أيام / 5 ليالٍ</span>
+                            <span><i class="fa-solid fa-plane-up ml-1 text-gold-500"></i> تذاكر الطيران + فندق 5 نجوم</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-xs text-gray-400 block">السعر للشخص</span>
+                                <span class="text-xl font-bold text-gold-500">450 دينار أردني</span>
+                            </div>
+                            <button onclick="prefillBooking('سحر إسطنبول وبورصة - 450 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tour 8 (Dubai) -->
+                <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="intl">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800" alt="دبي" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-violet-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلات دولية VIP</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                        <div class="absolute bottom-4 right-4 text-white">
+                            <span class="text-xs text-amber-300"><i class="fa-solid fa-star"></i> 4.8 (3,100 تقييم)</span>
+                            <h3 class="text-lg font-bold font-tajawal mt-1">دبي: عاصمة الحداثة والمستقبل</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">باقة حصرية لزيارة برج خليفة، نافورة دبي الراقصة، رحلات السفاري الصحراوية الفاخرة والتسوق الفاخر.</p>
+                        <div class="flex items-center justify-between text-xs border-y border-gray-100 dark:border-gray-800 py-3">
+                            <span><i class="fa-regular fa-clock ml-1 text-gold-500"></i> 5 أيام / 4 ليالٍ</span>
+                            <span><i class="fa-solid fa-plane-up ml-1 text-gold-500"></i> طيران مباشر + فندق 5*</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-xs text-gray-400 block">السعر للشخص</span>
+                                <span class="text-xl font-bold text-gold-500">390 دينار أردني</span>
+                            </div>
+                            <button onclick="prefillBooking('دبي عاصمة المستقبل - 390 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tour 9 (Egypt) -->
+                <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="intl">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?q=80&w=800" alt="القاهرة مصر والأهرامات" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-violet-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلات دولية VIP</span>
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
+                        <div class="absolute bottom-4 right-4 text-white">
+                            <span class="text-xs text-amber-300"><i class="fa-solid fa-star"></i> 4.9 (2,900 تقييم)</span>
+                            <h3 class="text-lg font-bold font-tajawal mt-1">تاريخ وحضارة مصر الفرعونية</h3>
+                        </div>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <p class="text-xs text-gray-500 dark:text-gray-400">زر أهرامات الجيزة الخالدة، واستمتع برحلة نيلية مهدئة مع المأكولات التراثية وجولات المتحف المصري الجديد.</p>
+                        <div class="flex items-center justify-between text-xs border-y border-gray-100 dark:border-gray-800 py-3">
+                            <span><i class="fa-regular fa-clock ml-1 text-gold-500"></i> 5 أيام / 4 ليالٍ</span>
+                            <span><i class="fa-solid fa-hotel ml-1 text-gold-500"></i> طيران + مرشد دائم</span>
+                        </div>
+                        <div class="flex items-center justify-between pt-2">
+                            <div>
+                                <span class="text-xs text-gray-400 block">السعر للشخص</span>
+                                <span class="text-xl font-bold text-gold-500">320 دينار أردني</span>
+                            </div>
+                            <button onclick="prefillBooking('مصر الفرعونية - 320 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers & Limited-Time Countdown Banner -->
+    <section id="offers" class="py-24 bg-gradient-to-r from-slate-900 via-luxuryDark-900 to-slate-950 text-white relative overflow-hidden reveal">
+        <!-- Floating Gold Geometric Decor -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -bottom-10 -left-10 w-[300px] h-[300px] bg-gold-400/5 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Details Content -->
+                <div class="space-y-6">
+                    <span class="inline-block px-4 py-1 rounded-full bg-gold-500 text-xs font-bold uppercase tracking-wider text-black">عروض عطلة نهاية الأسبوع الحصرية</span>
+                    <h2 class="text-3xl sm:text-5xl font-black font-tajawal leading-tight">احصل على خصم <span class="text-gradient">25%</span> على رحلتك القادمة لوادي رم والبتراء!</h2>
+                    <p class="text-gray-300 leading-relaxed font-light">
+                        اغتنم الفرصة الذهبية وانضم إلينا في مغامرة الأحلام الشاملة لمحميات الجنوب الأردني بأسعار غير مسبوقة وتجربة متكاملة تتضمن تخييم VIP وجولات سفاري. ينتهي هذا العرض الحصري قريباً!
+                    </p>
+                    
+                    <!-- Digital Countdown Clock -->
+                    <div class="flex items-center gap-4 text-center" id="countdown-timer">
+                        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl w-20 border border-white/10">
+                            <span class="text-2xl sm:text-3xl font-extrabold text-gold-400 block" id="days">00</span>
+                            <span class="text-[10px] text-gray-300 uppercase tracking-widest font-light mt-1 block">أيام</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl w-20 border border-white/10">
+                            <span class="text-2xl sm:text-3xl font-extrabold text-gold-400 block" id="hours">00</span>
+                            <span class="text-[10px] text-gray-300 uppercase tracking-widest font-light mt-1 block">ساعات</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl w-20 border border-white/10">
+                            <span class="text-2xl sm:text-3xl font-extrabold text-gold-400 block" id="minutes">00</span>
+                            <span class="text-[10px] text-gray-300 uppercase tracking-widest font-light mt-1 block">دقائق</span>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-md p-4 rounded-2xl w-20 border border-white/10">
+                            <span class="text-2xl sm:text-3xl font-extrabold text-rose-400 block" id="seconds">00</span>
+                            <span class="text-[10px] text-gray-300 uppercase tracking-widest font-light mt-1 block">ثوانٍ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Visual Promo Card -->
+                <div class="relative flex justify-center lg:justify-end">
+                    <div class="glassmorphism p-8 rounded-3xl border border-white/20 w-full max-w-md shadow-2xl relative">
+                        <div class="absolute -top-6 -right-6 w-16 h-16 rounded-full bg-gold-500 text-slate-900 font-bold flex items-center justify-center shadow-lg transform rotate-12">خصم 25%</div>
+                        <h3 class="text-xl font-bold font-tajawal mb-4 text-gradient border-b border-white/10 pb-4">مواصفات باقة العرض</h3>
+                        <ul class="space-y-4 text-sm text-gray-200 font-light">
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-gold-400"></i> ليلة واحدة في وادي رم + نهار في البتراء</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-gold-400"></i> بوفيه مفتوح (فطور + غداء + عشاء)</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-gold-400"></i> تنقل بسيارة مرسيدس حديثة مكيفة</li>
+                            <li class="flex items-center gap-3"><i class="fa-solid fa-circle-check text-gold-400"></i> دليل سياحي مرخص يرافقكم بالكامل</li>
+                        </ul>
+                        <div class="mt-8">
+                            <button onclick="prefillBooking('باقة عرض وادي رم والبتراء بخصم 25%')" class="w-full py-4 bg-gradient-to-r from-gold-500 to-amber-400 text-slate-950 font-bold text-center rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl shadow-gold-500/20">استفد من العرض والخصم</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section (معرض الصور المتحرك و Lightbox) -->
+    <section id="gallery" class="py-24 bg-white/40 dark:bg-luxuryDark-950/80 reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold-500 font-bold text-sm uppercase">ذكريات ولحظات لا تموت</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-tajawal mt-2 text-slate-900 dark:text-white">معرض عدسات الأفق السياحية</h2>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-3">لقطات حقيقية من رحلاتنا ومغامرات عملائنا في الأردن والعالم. شاركنا رحلتك القادمة!</p>
+            </div>
+
+            <!-- Custom Grid of High Resolution Photos -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Gallery Item 1 -->
+                <div class="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-lg border border-white/10" onclick="openLightbox(0)">
+                    <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?q=80&w=800" alt="طبيعة عجلون ومحمية الغابات الخضراء" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs text-gold-400 font-bold">عجلون، الأردن</span>
+                        <h4 class="text-base font-bold font-tajawal text-white mt-1">غابات عجلون الخلابة</h4>
+                    </div>
+                </div>
+                <!-- Gallery Item 2 -->
+                <div class="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-lg border border-white/10" onclick="openLightbox(1)">
+                    <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?q=80&w=800" alt="البتراء المدينة الوردية الأردن" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs text-gold-400 font-bold">معلم أثري عالمي</span>
+                        <h4 class="text-base font-bold font-tajawal text-white mt-1">الخزنة في البتراء الورديّة</h4>
+                    </div>
+                </div>
+                <!-- Gallery Item 3 -->
+                <div class="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-lg border border-white/10" onclick="openLightbox(2)">
+                    <img src="https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?q=80&w=800" alt="غروب الشمس في وادي رم" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs text-gold-400 font-bold">صحراء وادي رم، الأردن</span>
+                        <h4 class="text-base font-bold font-tajawal text-white mt-1">غروب ساحر في وادي القمر</h4>
+                    </div>
+                </div>
+                <!-- Gallery Item 4 -->
+                <div class="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-lg border border-white/10" onclick="openLightbox(3)">
+                    <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?q=80&w=800" alt="البحر الميت والاستجمام بالاملاح" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-xs text-gold-400 font-bold">البحر الميت، الأردن</span>
+                        <h4 class="text-base font-bold font-tajawal text-white mt-1">العلاج الطبيعي والاسترخاء</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials / Customer Reviews Section -->
+    <section class="py-24 bg-slate-50 dark:bg-luxuryDark-900/40 reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold-500 font-bold text-sm uppercase">آراء وتجارب المسافرين النخبة</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-tajawal mt-2 text-slate-900 dark:text-white">ماذا يقول عملاؤنا عنا؟</h2>
+            </div>
+
+            <!-- Swiper Slider Implementation -->
+            <div class="swiper testimonials-swiper">
+                <div class="swiper-wrapper pb-14">
+                    <!-- Review 1 -->
+                    <div class="swiper-slide p-2">
+                        <div class="glass-card p-8 rounded-3xl relative border border-white/20 text-right">
+                            <i class="fa-solid fa-quote-left absolute top-6 left-6 text-gold-300/30 text-5xl"></i>
+                            <div class="flex items-center gap-4 mb-6">
+                                <img src="https://placehold.co/100x100/1e293b/ffffff?text=M" alt="العميل محمد" class="w-14 h-14 rounded-full object-cover border-2 border-gold-500">
+                                <div>
+                                    <h4 class="font-bold text-slate-900 dark:text-white">م. محمد بني مصطفى</h4>
+                                    <p class="text-xs text-gray-400">عجلون، الأردن</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-300 leading-relaxed font-light mb-4">
+                                "قمت بحجز جولة عجلون ومحمية الغابات لعائلتي. التنظيم كان غاية في الاحترافية والدقة، والحافلة كانت مريحة وحديثة جداً. السعر ممتاز والخدمة فاخرة بالفعل!"
+                            </p>
+                            <div class="text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Review 2 -->
+                    <div class="swiper-slide p-2">
+                        <div class="glass-card p-8 rounded-3xl relative border border-white/20 text-right">
+                            <i class="fa-solid fa-quote-left absolute top-6 left-6 text-gold-300/30 text-5xl"></i>
+                            <div class="flex items-center gap-4 mb-6">
+                                <img src="https://placehold.co/100x100/1e293b/ffffff?text=A" alt="العميلة عائشة" class="w-14 h-14 rounded-full object-cover border-2 border-gold-500">
+                                <div>
+                                    <h4 class="font-bold text-slate-900 dark:text-white">د. عائشة العتيبي</h4>
+                                    <p class="text-xs text-gray-400">الرياض، السعودية</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-300 leading-relaxed font-light mb-4">
+                                "سافرنا مع رحلات الأفق إلى البتراء ووادي رم. التخييم كان تجربة خيالية فوق الوصف، والخدمة فاقت التوقعات بكثير. سنكرر التجربة بالتأكيد في إجازتنا القادمة."
+                            </p>
+                            <div class="text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Review 3 -->
+                    <div class="swiper-slide p-2">
+                        <div class="glass-card p-8 rounded-3xl relative border border-white/20 text-right">
+                            <i class="fa-solid fa-quote-left absolute top-6 left-6 text-gold-300/30 text-5xl"></i>
+                            <div class="flex items-center gap-4 mb-6">
+                                <img src="https://placehold.co/100x100/1e293b/ffffff?text=F" alt="العميل فادي" class="w-14 h-14 rounded-full object-cover border-2 border-gold-500">
+                                <div>
+                                    <h4 class="font-bold text-slate-900 dark:text-white">أ. فادي حداد</h4>
+                                    <p class="text-xs text-gray-400">عمان، الأردن</p>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-300 leading-relaxed font-light mb-4">
+                                "حجزنا باقة لتركيا مدتها 6 أيام عن طريق فرع عجلون، وحظينا ببرنامج متكامل منسق دقيق لم نشعر فيه بملل وبخدمة ممتازة، ومتابعة يومية من خدمة العملاء."
+                            </p>
+                            <div class="text-amber-400 text-xs">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pagination dots -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section (الأسئلة الشائعة المتفاعلة) -->
+    <section id="faq" class="py-24 reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold-500 font-bold text-sm uppercase">تساؤلات واستفسارات متكررة</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-tajawal mt-2 text-slate-900 dark:text-white">الأسئلة الشائعة حول رحلاتنا وطرق الدفع</h2>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800 transition-all duration-300">
+                    <button class="faq-btn flex items-center justify-between w-full p-6 text-right font-semibold text-base sm:text-lg focus:outline-none" onclick="toggleFaq(this)">
+                        <span>كيف يمكنني إتمام الحجز للرحلات؟</span>
+                        <i class="fa-solid fa-chevron-down text-gold-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <div class="p-6 pt-0 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-800 leading-relaxed">
+                            يمكنك استخدام نموذج الحجز الإلكتروني في هذه الصفحة واختيار رحلتك المفضلة وسنقوم بالتواصل معك فوراً، أو الاتصال بفريق خدمة العملاء هاتفياً لترتيب تفاصيل الدفع والحصول على التذاكر الورقية أو الإلكترونية.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800 transition-all duration-300">
+                    <button class="faq-btn flex items-center justify-between w-full p-6 text-right font-semibold text-base sm:text-lg focus:outline-none" onclick="toggleFaq(this)">
+                        <span>ما هي طرق الدفع المعتمدة لديكم في الأردن؟</span>
+                        <i class="fa-solid fa-chevron-down text-gold-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <div class="p-6 pt-0 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-800 leading-relaxed">
+                            نقبل الدفع نقداً في مكتب عجلون، والتحويل البنكي الفوري، بالإضافة إلى محافظ الهاتف المحمول (زين كاش، كليك CLIQ)، والدفع بواسطة بطاقات الائتمان (فيزا / ماستركارد) لنوفر لك تجربة مريحة وسلسة.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-800 transition-all duration-300">
+                    <button class="faq-btn flex items-center justify-between w-full p-6 text-right font-semibold text-base sm:text-lg focus:outline-none" onclick="toggleFaq(this)">
+                        <span>هل تتوفر لديكم عروض مخصصة للعائلات الكبيرة؟</span>
+                        <i class="fa-solid fa-chevron-down text-gold-500 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                        <div class="p-6 pt-0 text-sm text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-800 leading-relaxed">
+                            نعم بكل تأكيد! نصمم باقات خاصة للعائلات والشركات والمجموعات الكبيرة مع خصومات استثنائية تصل إلى 30% مع مرونة كاملة في تعديل وتفصيل البرنامج السياحي بما يتلاءم مع متطلباتكم وراحتكم.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Travel Blog Section (المدونة السياحية) -->
+    <section class="py-24 bg-slate-50 dark:bg-luxuryDark-900/60 reveal">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold-500 font-bold text-sm uppercase">أسرار السفر ووجهات خلابة</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-tajawal mt-2 text-slate-900 dark:text-white">المدونة السياحية للأفق</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Blog Item 1 -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?q=80&w=600" alt="قلعة عجلون وتاريخها العريق" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute bottom-4 right-4 bg-slate-950 text-white text-xs font-bold px-3 py-1">تاريخ عجلون</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-lg font-bold group-hover:text-gold-500 transition-colors">عجلون: قلعة صلاح الدين الأثرية وكنوز الطبيعة</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">دليلك الكامل لاستكشاف قلعة الربض التاريخية ومسارات المشي الطبيعية في المحمية...</p>
+                        <a href="#contact" class="text-xs text-gold-500 font-bold inline-flex items-center gap-1 hover:underline">اقرأ المزيد <i class="fa-solid fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                <!-- Blog Item 2 -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?q=80&w=600" alt="مسارات البتراء الفريدة" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute bottom-4 right-4 bg-slate-950 text-white text-xs font-bold px-3 py-1">أسرار البتراء</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-lg font-bold group-hover:text-gold-500 transition-colors">5 معالم خفية في البتراء لا يفوتك زيارتها</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">كل ما تحتاج لمعرفته حول المعالم الخفية خلف السيق والخزنة كالمذبح ومسار الدير الوعر...</p>
+                        <a href="#contact" class="text-xs text-gold-500 font-bold inline-flex items-center gap-1 hover:underline">اقرأ المزيد <i class="fa-solid fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                <!-- Blog Item 3 -->
+                <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?q=80&w=600" alt="تخييم في صحراء الأردن" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute bottom-4 right-4 bg-slate-950 text-white text-xs font-bold px-3 py-1">نصائح مفيدة</span>
+                    </div>
+                    <div class="p-6 space-y-3">
+                        <h3 class="text-lg font-bold group-hover:text-gold-500 transition-colors">كيف تستعد لرحلة التخييم الأولى في وادي رم</h3>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">الملابس المناسبة، الاستعداد لتغير درجات الحرارة وطرق رصد النجوم والمجرات الفلكية...</p>
+                        <a href="#contact" class="text-xs text-gold-500 font-bold inline-flex items-center gap-1 hover:underline">اقرأ المزيد <i class="fa-solid fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section (استمارة ونموذج الحجز التفاعلي) -->
+    <section id="booking" class="py-24 relative overflow-hidden reveal">
+        <div class="container mx-auto px-6">
+            <div class="glassmorphism rounded-3xl p-8 lg:p-14 border border-white/20 relative z-10 max-w-4xl mx-auto shadow-2xl">
+                <div class="text-center max-w-xl mx-auto mb-10">
+                    <span class="text-gold-500 font-bold text-sm uppercase">احجز مغامرتك القادمة الآن</span>
+                    <h2 class="text-3xl font-bold font-tajawal text-slate-900 dark:text-white mt-1">دع الخبراء ينظمون عطلتك المثالية</h2>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">يرجى تعبئة الحقول وسيقوم مسؤول الحجوزات بفرع عجلون بالتواصل معك خلال ساعة واحدة لإتمام الترتيبات.</p>
+                </div>
+
+                <!-- Custom Booking Form -->
+                <form id="booking-form" class="grid grid-cols-1 md:grid-cols-2 gap-6" onsubmit="handleFormSubmit(event, 'booking')">
+                    <!-- Column 1 -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-slate-700 dark:text-gray-300">الاسم الثلاثي بالكامل *</label>
+                            <input type="text" required placeholder="محمد أحمد حسن" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-slate-700 dark:text-gray-300">رقم الهاتف النشط (واتساب) *</label>
+                            <input type="tel" required placeholder="079XXXXXXX" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none transition-all">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-slate-700 dark:text-gray-300">البريد الإلكتروني المفضل</label>
+                            <input type="email" placeholder="example@domain.com" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none transition-all">
+                        </div>
+                    </div>
+
+                    <!-- Column 2 -->
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-slate-700 dark:text-gray-300">اختيار الوجهة أو الباقة السياحية *</label>
+                            <select id="booking-tour-select" required class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none transition-all text-slate-700 dark:text-white">
+                                <option value="" disabled selected>-- يرجى اختيار وجهتك المفضلة --</option>
+                                <option value="عجلون">جولة عجلون ومحمية الغابات - 35 دينار أردني</option>
+                                <option value="جرش">جرش والمدينة الأثرية - 40 دينار أردني</option>
+                                <option value="البحر الميت">البحر الميت والاستجمام - 55 دينار أردني</option>
+                                <option value="البتراء">البتراء: رحلة المدينة الوردية - 95 دينار أردني</option>
+                                <option value="وادي رم">وادي رم: تجربة تخييم المريخ - 85 دينار أردني</option>
+                                <option value="العقبة">العقبة والبحر الأحمر - 75 دينار أردني</option>
+                                <option value="تركيا">سحر إسطنبول وبورصة - 450 دينار أردني</option>
+                                <option value="دبي">دبي عاصمة المستقبل - 390 دينار أردني</option>
+                                <option value="مصر">تاريخ وحضارة مصر الفرعونية - 320 دينار أردني</option>
+                                <option value="أخرى">وجهة ومواصفات خاصة ومصممة</option>
+                            </select>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-slate-700 dark:text-gray-300">تاريخ الانطلاق *</label>
+                                <input type="date" required class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none transition-all text-slate-700 dark:text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-slate-700 dark:text-gray-300">عدد الأشخاص *</label>
+                                <input type="number" required min="1" max="50" placeholder="1" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none transition-all text-slate-700 dark:text-white">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-slate-700 dark:text-gray-300">أي ملاحظات خاصة أو تفضيلات VIP؟</label>
+                            <textarea rows="2" placeholder="مثال: غرف متصلة، سيارة دفع رباعي خاصة، تفضيلات صحية بالوجبات..." class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none transition-all"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Button Full Width -->
+                    <div class="md:col-span-2 pt-4">
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-gold-600 via-gold-500 to-gold-400 text-slate-950 font-extrabold text-center rounded-2xl hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl shadow-gold-500/20 text-base">
+                            <i class="fa-solid fa-paper-plane ml-2"></i> تأكيد طلبي وإرسال الحجز المبدئي
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section (اتصل بنا مع دمج الخريطة الجغرافية) -->
+    <section id="contact" class="py-24 bg-slate-50 dark:bg-luxuryDark-900/60 reveal">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact info & map -->
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-gold-500 font-bold text-sm uppercase">تواصل دائم على مدار الساعة</span>
+                        <h2 class="text-3xl font-bold font-tajawal text-slate-900 dark:text-white mt-1">مرحباً بكم في مقرنا بعجلون</h2>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">تفضلوا بزيارة مكتبنا لشرب القهوة ومناقشة عطلتكم القادمة، أو تواصلوا عبر القنوات الرسمية.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">مقرنا الرئيسي:</h4>
+                                <p class="text-xs text-gray-400">شارع القلعة، بالقرب من محمية الغابات الطبيعية - عجلون، الأردن</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-phone-volume"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">أرقام الهواتف:</h4>
+                                <p class="text-xs text-gray-400" dir="ltr">+962 2 642 0000 | +962 7 9123 4567</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-gold-500/10 text-gold-500 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-envelope-open-text"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm">البريد الإلكتروني للشركة:</h4>
+                                <p class="text-xs text-gray-400">booking@horizon-voyages.jo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Google Map pointing to Ajloun -->
+                    <div class="rounded-3xl overflow-hidden h-72 shadow-lg border border-gray-200 dark:border-gray-800">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13460.774431872856!2d35.7486111!3d32.3333333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c89fbf6b85b41%3A0xe54d6fa7cbdfbf3b!2sAjloun%20Castle!5e0!3m2!1sen!2sjo!4v1689000000000!5m2!1sen!2sjo" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <!-- Contact Feedback Form -->
+                <div class="glass-card p-8 lg:p-12 rounded-3xl border border-white/20 shadow-2xl space-y-6">
+                    <h3 class="text-2xl font-bold font-tajawal border-b border-gray-100 dark:border-gray-800 pb-4">أرسل لنا استفساراً سريعاً</h3>
+                    <form id="contact-form" class="space-y-4" onsubmit="handleFormSubmit(event, 'contact')">
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-2 text-slate-700 dark:text-gray-300">الاسم الكريم *</label>
+                            <input type="text" required placeholder="أحمد الكردي" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-2 text-slate-700 dark:text-gray-300">البريد الإلكتروني للتواصل *</label>
+                            <input type="email" required placeholder="example@mail.com" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-2 text-slate-700 dark:text-gray-300">عنوان الرسالة أو الموضوع *</label>
+                            <input type="text" required placeholder="سؤال بخصوص الباقات الخارجية" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase mb-2 text-slate-700 dark:text-gray-300">تفاصيل رسالتك ومقترحك *</label>
+                            <textarea required rows="4" placeholder="اكتب تفاصيل سؤالك هنا لنجيبك فوراً..." class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-4 bg-slate-950 dark:bg-white text-white dark:text-slate-950 font-bold text-center rounded-xl hover:bg-gold-500 dark:hover:bg-gold-500 dark:hover:text-white transition-all duration-300 shadow-md">
+                            إرسال الرسالة الإلكترونية
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partner Brands Scroller Section -->
+    <section class="py-16 bg-white dark:bg-luxuryDark-950 border-t border-gray-100 dark:border-gray-900">
+        <div class="container mx-auto px-6">
+            <h4 class="text-center text-xs font-semibold uppercase tracking-widest text-gold-500 mb-8">شركاء النجاح المعتمدون حول العالم</h4>
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-8 items-center justify-items-center opacity-60 dark:opacity-40">
+                <span class="text-sm font-bold tracking-widest text-slate-800 dark:text-white"><i class="fa-solid fa-hotel ml-1"></i> Hilton Hotels</span>
+                <span class="text-sm font-bold tracking-widest text-slate-800 dark:text-white"><i class="fa-solid fa-plane-up ml-1"></i> RJ Airlines</span>
+                <span class="text-sm font-bold tracking-widest text-slate-800 dark:text-white"><i class="fa-solid fa-shield ml-1"></i> Allianz Ins.</span>
+                <span class="text-sm font-bold tracking-widest text-slate-800 dark:text-white"><i class="fa-solid fa-ticket ml-1"></i> Booking.com</span>
+                <span class="text-sm font-bold tracking-widest text-slate-800 dark:text-white"><i class="fa-solid fa-earth-americas ml-1"></i> Expedia</span>
+                <span class="text-sm font-bold tracking-widest text-slate-800 dark:text-white"><i class="fa-solid fa-umbrella-beach ml-1"></i> TripAdvisor</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Luxury Multi-Column Footer Section -->
+    <footer class="bg-luxuryDark-950 text-white border-t border-gray-800 pt-20 pb-8">
+        <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16">
+            <!-- Brand Column -->
+            <div class="space-y-6">
+                <a href="#" class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-tr from-gold-600 to-gold-400 flex items-center justify-center shadow-lg">
+                        <i class="fa-solid fa-plane-departure text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold font-tajawal tracking-tight">أفق السياحة</h1>
+                        <p class="text-[10px] text-gold-400 font-light -mt-1 tracking-wider">HORIZON TRAVELS</p>
+                    </div>
+                </a>
+                <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    نحن نسعى في الأفق السياحية لإثراء حياة عملائنا من خلال باقات سفر فريدة وفاخرة تتناسب مع رغباتهم وتحترم أوقاتهم وتطلعاتهم.
+                </p>
+                <!-- Social media -->
+                <div class="flex items-center gap-4 text-gray-400">
+                    <a href="#" class="hover:text-gold-500 transition-colors"><i class="fa-brands fa-facebook text-xl"></i></a>
+                    <a href="#" class="hover:text-gold-500 transition-colors"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    <a href="#" class="hover:text-gold-500 transition-colors"><i class="fa-brands fa-x-twitter text-xl"></i></a>
+                    <a href="#" class="hover:text-gold-500 transition-colors"><i class="fa-brands fa-youtube text-xl"></i></a>
+                    <a href="#" class="hover:text-gold-500 transition-colors"><i class="fa-brands fa-whatsapp text-xl"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 class="text-gold-500 font-bold text-sm tracking-widest uppercase mb-6">روابط سريعة</h4>
+                <ul class="space-y-3 text-xs text-gray-400 font-light">
+                    <li><a href="#hero" class="hover:text-white transition-colors">الصفحة الرئيسية</a></li>
+                    <li><a href="#about" class="hover:text-white transition-colors">من نحن والشركاء</a></li>
+                    <li><a href="#services" class="hover:text-white transition-colors">باقات الخدمات والتميز</a></li>
+                    <li><a href="#tours" class="hover:text-white transition-colors">استعراض كافة الرحلات</a></li>
+                    <li><a href="#offers" class="hover:text-white transition-colors">العروض والخصومات المحدودة</a></li>
+                    <li><a href="#gallery" class="hover:text-white transition-colors">معرض الصور الحقيقية</a></li>
+                </ul>
+            </div>
+
+            <!-- Main Destinations (JOD) -->
+            <div>
+                <h4 class="text-gold-500 font-bold text-sm tracking-widest uppercase mb-6">أهم الباقات والأسعار</h4>
+                <ul class="space-y-3 text-xs text-gray-400 font-light">
+                    <li class="flex justify-between"><span>جولة عجلون ومحمية الغابات</span> <span class="font-bold text-gold-500">35 دينار</span></li>
+                    <li class="flex justify-between"><span>البتراء: رحلة المدينة الوردية</span> <span class="font-bold text-gold-500">95 دينار</span></li>
+                    <li class="flex justify-between"><span>وادي رم: تخييم المريخ</span> <span class="font-bold text-gold-500">85 دينار</span></li>
+                    <li class="flex justify-between"><span>جرش الأثرية العريقة</span> <span class="font-bold text-gold-500">40 دينار</span></li>
+                    <li class="flex justify-between"><span>سحر إسطنبول وبورصة (تركيا)</span> <span class="font-bold text-gold-500">450 دينار</span></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Box -->
+            <div class="space-y-6">
+                <h4 class="text-gold-500 font-bold text-sm tracking-widest uppercase mb-6">النشرة البريدية الماسية</h4>
+                <p class="text-xs text-gray-400 leading-relaxed font-light">
+                    اشترك الآن لتكون أول من يتلقى عروض السفر السريعة والخصومات الحصرية لأعضاء النادي.
+                </p>
+                <form class="space-y-2" onsubmit="handleFormSubmit(event, 'newsletter')">
+                    <input type="email" required placeholder="بريدك الإلكتروني" class="w-full px-4 py-3 bg-white/10 border border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-gold-500 text-xs">
+                    <button type="submit" class="w-full py-3 bg-gradient-to-r from-gold-600 to-gold-400 text-slate-950 font-bold rounded-xl text-xs hover:scale-105 transition-all duration-300">الاشتراك الفوري</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Copyright legal strip -->
+        <div class="container mx-auto px-6 pt-8 border-t border-gray-800 text-center text-xs text-gray-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <span>© 2026 شركة رحلات الأفق السياحية - عجلون، الأردن. جميع الحقوق محفوظة.</span>
+            <div class="flex gap-4 text-gray-400">
+                <a href="#" class="hover:text-white">سياسة الخصوصية</a>
+                <a href="#" class="hover:text-white">الشروط والأحكام</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Back-to-Top Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 w-12 h-12 rounded-full bg-gradient-to-tr from-gold-600 to-gold-400 text-slate-950 flex items-center justify-center shadow-2xl opacity-0 translate-y-10 transition-all duration-500 focus:outline-none hover:scale-110 active:scale-90" aria-label="الرجوع للأعلى">
+        <i class="fa-solid fa-arrow-up text-lg"></i>
+    </button>
+
+    <!-- Custom Success Glassmorphism Notification Toast -->
+    <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glassmorphism p-8 rounded-3xl max-w-sm w-full mx-6 text-center border border-white/20 shadow-2xl transform scale-90 transition-transform duration-300">
+            <div class="w-20 h-20 bg-emerald-500/10 text-emerald-400 rounded-full flex items-center justify-center text-4xl mx-auto mb-6">
+                <i class="fa-regular fa-circle-check"></i>
+            </div>
+            <h3 class="text-2xl font-bold font-tajawal mb-2 text-gradient" id="success-title">تمت العملية بنجاح!</h3>
+            <p class="text-sm text-gray-400 leading-relaxed font-light mb-6" id="success-desc">سيتواصل معك فريق الحجوزات بفرع عجلون قريباً جداً.</p>
+            <button onclick="closeSuccessModal()" class="w-full py-3 bg-gradient-to-r from-gold-600 to-gold-400 text-slate-950 font-bold rounded-xl text-sm hover:scale-105 active:scale-95 transition-all">موافق</button>
+        </div>
+    </div>
+
+    <!-- Gallery Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white text-3xl hover:text-red-500 focus:outline-none" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
+        <button class="absolute left-6 text-white text-4xl hover:text-gold-500 focus:outline-none" onclick="event.stopPropagation(); changeLightboxImage(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="absolute right-6 text-white text-4xl hover:text-gold-500 focus:outline-none" onclick="event.stopPropagation(); changeLightboxImage(1)"><i class="fa-solid fa-chevron-right"></i></button>
+        
+        <div class="max-w-4xl max-h-[80vh] px-4 flex flex-col items-center" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="معرض الصور" class="max-w-full max-h-[75vh] object-contain rounded-2xl border border-white/10 shadow-2xl">
+            <p id="lightbox-caption" class="text-white text-sm mt-4 font-light text-center"></p>
+        </div>
+    </div>
+
+    <!-- Swiper JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // Theme Toggle Control
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const themeToggleIcon = document.getElementById('theme-toggle-icon');
+        const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+        const mobileThemeToggleIcon = document.getElementById('mobile-theme-toggle-icon');
+
+        function setTheme(isDark) {
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+                themeToggleIcon.className = "fa-solid fa-sun text-lg";
+                mobileThemeToggleIcon.className = "fa-solid fa-sun";
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+                themeToggleIcon.className = "fa-solid fa-moon text-lg";
+                mobileThemeToggleIcon.className = "fa-solid fa-moon";
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Initialize theme based on preference or system
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        setTheme(savedTheme === 'dark' || (!savedTheme && systemPrefersDark));
+
+        themeToggleBtn.addEventListener('click', () => {
+            setTheme(!document.documentElement.classList.contains('dark'));
+        });
+        mobileThemeToggleBtn.addEventListener('click', () => {
+            setTheme(!document.documentElement.classList.contains('dark'));
+        });
+
+        // Hide Preloader on Window Load
+        window.addEventListener('load', () => {
+            const loaderProgressBar = document.getElementById('loader-progress');
+            loaderProgressBar.style.width = '100%';
+            
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.classList.add('opacity-0');
+                loader.classList.add('pointer-events-none');
+            }, 600);
+        });
+
+        // Header Blur on Scroll
+        const mainNav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                mainNav.classList.add('py-2');
+                mainNav.classList.remove('py-4');
+            } else {
+                mainNav.classList.add('py-4');
+                mainNav.classList.remove('py-2');
+            }
+        });
+
+        // Mobile Menu Drawer Control
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('translate-x-full');
+        });
+
+        const closeMobileMenu = () => {
+            mobileMenu.classList.add('translate-x-full');
+        };
+
+        closeMenuBtn.addEventListener('click', closeMobileMenu);
+        mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+
+        // Tour Baskets Tab Filters
+        const filterButtons = document.querySelectorAll('#tours-filter button');
+        const tourCards = document.querySelectorAll('.tour-card');
+
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active classes
+                filterButtons.forEach(b => {
+                    b.className = "tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-gray-100 dark:bg-slate-800 text-slate-700 dark:text-gray-300";
+                });
+                // Set active style
+                btn.className = "tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-gold-500 text-white shadow-lg";
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                tourCards.forEach(card => {
+                    const categories = card.getAttribute('data-category').split(', ');
+                    if (filterValue === 'all' || categories.includes(filterValue)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Booking Prefill Utility
+        function prefillBooking(tourName) {
+            const selectElement = document.getElementById('booking-tour-select');
+            
+            // Search for option that contains the string
+            for (let i = 0; i < selectElement.options.length; i++) {
+                if (selectElement.options[i].text.includes(tourName.split(' - ')[0])) {
+                    selectElement.selectedIndex = i;
+                    break;
+                }
+            }
+            
+            // Smooth scroll down to the form
+            document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Live Countdown Clock (Automatically stays in the future to avoid expiration!)
+        const targetDate = new Date();
+        targetDate.setDate(targetDate.getDate() + 3); // Set always to 3 days in future
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Lightbox Gallery logic
+        const galleryImages = [
+            { src: "https://images.unsplash.com/photo-1610123598147-f632aa18b275?q=80&w=1200", caption: "عجلون - مسارات خضراء وغابات ساحرة تحيط بالقلعة التاريخية" },
+            { src: "https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?q=80&w=1200", caption: "البتراء - صخور وردية شامخة تخفي أسرار الأنباط" },
+            { src: "https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?q=80&w=1200", caption: "وادي رم - هدوء الصحراء الساحرة والمخيمات ذات الطراز الفاخر" },
+            { src: "https://images.unsplash.com/photo-1590073844006-33379778ae09?q=80&w=1200", caption: "البحر الميت - طفو طبيعي ومياه غنية بالمعادن الشافية" }
+        ];
+        let currentImageIndex = 0;
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            document.getElementById('lightbox-img').src = galleryImages[index].src;
+            document.getElementById('lightbox-caption').innerText = galleryImages[index].caption;
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        function changeLightboxImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex >= galleryImages.length) currentImageIndex = 0;
+            if (currentImageIndex < 0) currentImageIndex = galleryImages.length - 1;
+            document.getElementById('lightbox-img').src = galleryImages[currentImageIndex].src;
+            document.getElementById('lightbox-caption').innerText = galleryImages[currentImageIndex].caption;
+        }
+
+        // Success Modals control
+        function handleFormSubmit(event, type) {
+            event.preventDefault();
+            const successModal = document.getElementById('success-modal');
+            const titleEl = document.getElementById('success-title');
+            const descEl = document.getElementById('success-desc');
+
+            if (type === 'booking') {
+                titleEl.innerText = "تم تأكيد طلب الحجز!";
+                descEl.innerText = "شكراً لاختيارك الأفق السياحية. تم تسجيل حجزك المبدئي، وسيقوم مسؤول المبيعات بالتواصل معك فوراً على واتساب أو اتصال هاتفي لإتمام التذاكر.";
+            } else if (type === 'contact') {
+                titleEl.innerText = "تم إرسال رسالتك!";
+                descEl.innerText = "وصلت رسالتك بنجاح إلى قسم خدمة العملاء بعجلون، وسوف نتواصل معك عبر بريدك الإلكتروني خلال 24 ساعة للإجابة على جميع الاستفسارات.";
+            } else if (type === 'newsletter') {
+                titleEl.innerText = "تم الاشتراك في النشرة!";
+                descEl.innerText = "مرحباً بك في نادي النخبة الخاص برحلات الأفق! تم تفعيل اشتراكك وستصلك أقوى العروض الحصرية أولاً بأول.";
+            }
+
+            // Reset Form Fields
+            event.target.reset();
+
+            // Display modal
+            successModal.classList.remove('opacity-0', 'pointer-events-none');
+            successModal.firstElementChild.classList.remove('scale-90');
+        }
+
+        function closeSuccessModal() {
+            const successModal = document.getElementById('success-modal');
+            successModal.classList.add('opacity-0', 'pointer-events-none');
+            successModal.firstElementChild.classList.add('scale-90');
+        }
+
+        // FAQ Accordion logic
+        function toggleFaq(btn) {
+            const faqContent = btn.nextElementSibling;
+            const icon = btn.querySelector('i');
+            
+            // Toggle current panel
+            if (faqContent.style.maxHeight) {
+                faqContent.style.maxHeight = null;
+                icon.style.transform = 'rotate(0deg)';
+                btn.parentElement.classList.remove('border-gold-500/50');
+            } else {
+                // Close all other panels
+                document.querySelectorAll('.faq-content').forEach(content => {
+                    content.style.maxHeight = null;
+                    content.previousElementSibling.querySelector('i').style.transform = 'rotate(0deg)';
+                    content.parentElement.classList.remove('border-gold-500/50');
+                });
+                
+                faqContent.style.maxHeight = faqContent.scrollHeight + "px";
+                icon.style.transform = 'rotate(180deg)';
+                btn.parentElement.classList.add('border-gold-500/50');
+            }
+        }
+
+        // Animated Stats Counter
+        const counterSection = document.querySelector('[data-target]');
+        let countUpStarted = false;
+
+        function startCountUp() {
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = parseInt(counter.parentElement.getAttribute('data-target'));
+                    const count = parseInt(counter.innerText);
+                    const speed = target / 100;
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + speed);
+                        setTimeout(updateCount, 15);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        }
+
+        // Counter Section Observer
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countUpStarted) {
+                    startCountUp();
+                    countUpStarted = true;
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+        // Scroll Reveal Elements Handler
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Scroll to Top visibility
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.remove('opacity-0', 'translate-y-10');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'translate-y-10');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Initialize Swiper Carousel
+        const swiper = new Swiper('.testimonials-swiper', {
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            }
+        });
+    </script>
+</body>
+</html>
