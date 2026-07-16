@@ -17,7 +17,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     
     <!-- Swiper CSS CDN for Premium Carousels -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" media="print" onload="this.media='all'" />
 
     <script>
         tailwind.config = {
@@ -230,7 +230,7 @@
     <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         <!-- Parallax Background Image -->
         <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 scale-105" 
-             style="background-image: url('https://images.unsplash.com/photo-1548711509-813c9e6db3b6?q=80&w=1920');">
+             style="background-image: url('https://images.unsplash.com/photo-1548711509-813c9e6db3b6?auto=format&fit=crop&q=80&w=1200');">
             <!-- Luxury dark radial overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-luxuryDark-950 via-slate-950/75 to-transparent"></div>
         </div>
@@ -316,7 +316,7 @@
                 <div class="relative group">
                     <div class="absolute inset-0 bg-gradient-to-tr from-gold-500 to-transparent opacity-20 rounded-3xl blur-2xl"></div>
                     <!-- Main image (Ajloun green hills) -->
-                    <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?q=80&w=1200" alt="طبيعة عجلون الساحرة" class="rounded-3xl shadow-2xl object-cover w-full h-[450px] relative z-10 border border-white/10 group-hover:scale-[1.02] transition-transform duration-500">
+                    <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?auto=format&fit=crop&q=70&w=600" alt="طبيعة عجلون الساحرة" loading="lazy" class="rounded-3xl shadow-2xl object-cover w-full h-[450px] relative z-10 border border-white/10 group-hover:scale-[1.02] transition-transform duration-500">
                     <!-- Overlay Glass Card -->
                     <div class="absolute -bottom-6 -right-6 lg:bottom-10 lg:-right-10 z-20 glassmorphism p-6 rounded-2xl border border-white/20 max-w-xs shadow-xl">
                         <i class="fa-solid fa-quote-right text-gold-400 text-3xl mb-2"></i>
@@ -418,6 +418,13 @@
     <!-- Tours Grid Section (نظام باقات الرحلات) -->
     <section id="tours" class="py-24 reveal">
         <div class="container mx-auto px-6">
+            <!-- Search & Filter Real-Time Bar -->
+            <div class="mb-10 max-w-xl mx-auto glassmorphism p-4 rounded-2xl border border-gold-500/20 flex items-center gap-3 shadow-lg">
+                <i class="fa-solid fa-magnifying-glass text-gold-500 text-lg mr-2"></i>
+                <input type="text" id="tours-search-input" placeholder="ابحث عن وجهتك المفضلة (عجلون، البتراء، تركيا...)" class="w-full bg-transparent border-none text-sm focus:outline-none text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500">
+                <button id="tours-search-clear" class="hidden text-slate-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                 <div>
                     <span class="text-gold-500 font-bold text-sm uppercase">رحلات استثنائية منسقة بدقة</span>
@@ -437,7 +444,7 @@
                 <!-- Tour 1 (Ajloun) -->
                 <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic, adventure">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?q=80&w=800" alt="قلعة عجلون ومحمية الغابات" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?auto=format&fit=crop&q=70&w=400" alt="قلعة عجلون ومحمية الغابات" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 right-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلات اليوم الواحد</span>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
                         <div class="absolute bottom-4 right-4 text-white">
@@ -456,7 +463,10 @@
                                 <span class="text-xs text-gray-400 block">السعر للشخص</span>
                                 <span class="text-xl font-bold text-gold-500">35 دينار أردني</span>
                             </div>
-                            <button onclick="prefillBooking('جولة عجلون ومحمية الغابات - 35 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            <div class="flex gap-1">
+                                <button onclick="openItineraryModal('عجلون')" class="px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-gold-500/10 text-slate-800 dark:text-gray-200 text-xs font-bold rounded-xl transition-all">تفاصيل البرنامج</button>
+                                <button onclick="prefillBooking('جولة عجلون ومحمية الغابات - 35 دينار')" class="px-3 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -464,7 +474,7 @@
                 <!-- Tour 2 (Jerash) -->
                 <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1548711509-813c9e6db3b6?q=80&w=800" alt="مدينة جرش الأثرية" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1548711509-813c9e6db3b6?auto=format&fit=crop&q=70&w=400" alt="مدينة جرش الأثرية" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 right-4 bg-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلات اليوم الواحد</span>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
                         <div class="absolute bottom-4 right-4 text-white">
@@ -483,7 +493,10 @@
                                 <span class="text-xs text-gray-400 block">السعر للشخص</span>
                                 <span class="text-xl font-bold text-gold-500">40 دينار أردني</span>
                             </div>
-                            <button onclick="prefillBooking('جرش والمدينة الأثرية - 40 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            <div class="flex gap-1">
+                                <button onclick="openItineraryModal('جرش')" class="px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-gold-500/10 text-slate-800 dark:text-gray-200 text-xs font-bold rounded-xl transition-all">تفاصيل البرنامج</button>
+                                <button onclick="prefillBooking('جرش والمدينة الأثرية - 40 دينار')" class="px-3 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -491,7 +504,7 @@
                 <!-- Tour 3 (Dead Sea) -->
                 <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic, adventure">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?q=80&w=800" alt="البحر الميت" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?auto=format&fit=crop&q=70&w=400" alt="البحر الميت" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 right-4 bg-indigo-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">الاستجمام والصحة</span>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
                         <div class="absolute bottom-4 right-4 text-white">
@@ -510,7 +523,10 @@
                                 <span class="text-xs text-gray-400 block">السعر للشخص</span>
                                 <span class="text-xl font-bold text-gold-500">55 دينار أردني</span>
                             </div>
-                            <button onclick="prefillBooking('البحر الميت والاستجمام - 55 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            <div class="flex gap-1">
+                                <button onclick="openItineraryModal('البحر الميت')" class="px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-gold-500/10 text-slate-800 dark:text-gray-200 text-xs font-bold rounded-xl transition-all">تفاصيل البرنامج</button>
+                                <button onclick="prefillBooking('البحر الميت والاستجمام - 55 دينار')" class="px-3 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -518,7 +534,7 @@
                 <!-- Tour 4 (Petra) -->
                 <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?q=80&w=800" alt="البتراء المدينة الوردية" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&q=70&w=400" alt="البتراء المدينة الوردية" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 right-4 bg-orange-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلة كلاسيكية فاخرة</span>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
                         <div class="absolute bottom-4 right-4 text-white">
@@ -537,7 +553,10 @@
                                 <span class="text-xs text-gray-400 block">السعر للشخص</span>
                                 <span class="text-xl font-bold text-gold-500">95 دينار أردني</span>
                             </div>
-                            <button onclick="prefillBooking('البتراء المدينة الوردية - 95 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            <div class="flex gap-1">
+                                <button onclick="openItineraryModal('البتراء')" class="px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-gold-500/10 text-slate-800 dark:text-gray-200 text-xs font-bold rounded-xl transition-all">تفاصيل البرنامج</button>
+                                <button onclick="prefillBooking('البتراء المدينة الوردية - 95 دينار')" class="px-3 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -545,7 +564,7 @@
                 <!-- Tour 5 (Wadi Rum) -->
                 <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic, adventure">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?q=80&w=800" alt="وادي رم" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?auto=format&fit=crop&q=70&w=400" alt="وادي رم" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 right-4 bg-rose-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">سياحة تخييم ومغامرة</span>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
                         <div class="absolute bottom-4 right-4 text-white">
@@ -564,7 +583,10 @@
                                 <span class="text-xs text-gray-400 block">السعر للشخص</span>
                                 <span class="text-xl font-bold text-gold-500">85 دينار أردني</span>
                             </div>
-                            <button onclick="prefillBooking('وادي رم: تخييم المريخ - 85 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            <div class="flex gap-1">
+                                <button onclick="openItineraryModal('وادي رم')" class="px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-gold-500/10 text-slate-800 dark:text-gray-200 text-xs font-bold rounded-xl transition-all">تفاصيل البرنامج</button>
+                                <button onclick="prefillBooking('وادي رم: تخييم المريخ - 85 دينار')" class="px-3 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -572,7 +594,7 @@
                 <!-- Tour 6 (Aqaba) -->
                 <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="domestic, adventure">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?q=80&w=800" alt="خليج العقبة الأردن" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1544644181-1484b3fdfc62?auto=format&fit=crop&q=70&w=400" alt="خليج العقبة الأردن" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 right-4 bg-teal-500 text-white text-xs font-bold px-3 py-1.5 rounded-full">البحر والغوص</span>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
                         <div class="absolute bottom-4 right-4 text-white">
@@ -591,7 +613,10 @@
                                 <span class="text-xs text-gray-400 block">السعر للشخص</span>
                                 <span class="text-xl font-bold text-gold-500">75 دينار أردني</span>
                             </div>
-                            <button onclick="prefillBooking('العقبة والبحر الأحمر - 75 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            <div class="flex gap-1">
+                                <button onclick="openItineraryModal('العقبة')" class="px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-gold-500/10 text-slate-800 dark:text-gray-200 text-xs font-bold rounded-xl transition-all">تفاصيل البرنامج</button>
+                                <button onclick="prefillBooking('العقبة والبحر الأحمر - 75 دينار')" class="px-3 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -599,7 +624,7 @@
                 <!-- Tour 7 (Turkey) -->
                 <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="intl">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?q=80&w=800" alt="إسطنبول تركيا" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&q=70&w=400" alt="إسطنبول تركيا" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 right-4 bg-violet-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلات دولية VIP</span>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
                         <div class="absolute bottom-4 right-4 text-white">
@@ -618,7 +643,10 @@
                                 <span class="text-xs text-gray-400 block">السعر للشخص</span>
                                 <span class="text-xl font-bold text-gold-500">450 دينار أردني</span>
                             </div>
-                            <button onclick="prefillBooking('سحر إسطنبول وبورصة - 450 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            <div class="flex gap-1">
+                                <button onclick="openItineraryModal('تركيا')" class="px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-gold-500/10 text-slate-800 dark:text-gray-200 text-xs font-bold rounded-xl transition-all">تفاصيل البرنامج</button>
+                                <button onclick="prefillBooking('سحر إسطنبول وبورصة - 450 دينار')" class="px-3 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -626,7 +654,7 @@
                 <!-- Tour 8 (Dubai) -->
                 <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="intl">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?q=80&w=800" alt="دبي" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&q=70&w=400" alt="دبي" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 right-4 bg-violet-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلات دولية VIP</span>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
                         <div class="absolute bottom-4 right-4 text-white">
@@ -645,7 +673,10 @@
                                 <span class="text-xs text-gray-400 block">السعر للشخص</span>
                                 <span class="text-xl font-bold text-gold-500">390 دينار أردني</span>
                             </div>
-                            <button onclick="prefillBooking('دبي عاصمة المستقبل - 390 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            <div class="flex gap-1">
+                                <button onclick="openItineraryModal('دبي')" class="px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-gold-500/10 text-slate-800 dark:text-gray-200 text-xs font-bold rounded-xl transition-all">تفاصيل البرنامج</button>
+                                <button onclick="prefillBooking('دبي عاصمة المستقبل - 390 دينار')" class="px-3 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -653,7 +684,7 @@
                 <!-- Tour 9 (Egypt) -->
                 <div class="tour-card glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300" data-category="intl">
                     <div class="relative h-64 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?q=80&w=800" alt="القاهرة مصر والأهرامات" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&q=70&w=400" alt="القاهرة مصر والأهرامات" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         <span class="absolute top-4 right-4 bg-violet-600 text-white text-xs font-bold px-3 py-1.5 rounded-full">رحلات دولية VIP</span>
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 to-transparent"></div>
                         <div class="absolute bottom-4 right-4 text-white">
@@ -672,7 +703,10 @@
                                 <span class="text-xs text-gray-400 block">السعر للشخص</span>
                                 <span class="text-xl font-bold text-gold-500">320 دينار أردني</span>
                             </div>
-                            <button onclick="prefillBooking('مصر الفرعونية - 320 دينار')" class="px-4 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            <div class="flex gap-1">
+                                <button onclick="openItineraryModal('مصر')" class="px-3 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-gold-500/10 text-slate-800 dark:text-gray-200 text-xs font-bold rounded-xl transition-all">تفاصيل البرنامج</button>
+                                <button onclick="prefillBooking('مصر الفرعونية - 320 دينار')" class="px-3 py-2.5 bg-gradient-to-r from-gold-600 to-gold-400 text-white text-xs font-bold rounded-xl shadow-md hover:scale-105 transition-all">احجز باقتك</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -750,7 +784,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Gallery Item 1 -->
                 <div class="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-lg border border-white/10" onclick="openLightbox(0)">
-                    <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?q=80&w=800" alt="طبيعة عجلون ومحمية الغابات الخضراء" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?auto=format&fit=crop&q=70&w=400" alt="طبيعة عجلون ومحمية الغابات الخضراء" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                         <span class="text-xs text-gold-400 font-bold">عجلون، الأردن</span>
                         <h4 class="text-base font-bold font-tajawal text-white mt-1">غابات عجلون الخلابة</h4>
@@ -758,7 +792,7 @@
                 </div>
                 <!-- Gallery Item 2 -->
                 <div class="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-lg border border-white/10" onclick="openLightbox(1)">
-                    <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?q=80&w=800" alt="البتراء المدينة الوردية الأردن" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&q=70&w=400" alt="البتراء المدينة الوردية الأردن" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                         <span class="text-xs text-gold-400 font-bold">معلم أثري عالمي</span>
                         <h4 class="text-base font-bold font-tajawal text-white mt-1">الخزنة في البتراء الورديّة</h4>
@@ -766,7 +800,7 @@
                 </div>
                 <!-- Gallery Item 3 -->
                 <div class="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-lg border border-white/10" onclick="openLightbox(2)">
-                    <img src="https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?q=80&w=800" alt="غروب الشمس في وادي رم" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img src="https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?auto=format&fit=crop&q=70&w=400" alt="غروب الشمس في وادي رم" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                         <span class="text-xs text-gold-400 font-bold">صحراء وادي رم، الأردن</span>
                         <h4 class="text-base font-bold font-tajawal text-white mt-1">غروب ساحر في وادي القمر</h4>
@@ -774,7 +808,7 @@
                 </div>
                 <!-- Gallery Item 4 -->
                 <div class="group relative rounded-2xl overflow-hidden h-72 cursor-pointer shadow-lg border border-white/10" onclick="openLightbox(3)">
-                    <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?q=80&w=800" alt="البحر الميت والاستجمام بالاملاح" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <img src="https://images.unsplash.com/photo-1590073844006-33379778ae09?auto=format&fit=crop&q=70&w=400" alt="البحر الميت والاستجمام بالاملاح" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
                         <span class="text-xs text-gold-400 font-bold">البحر الميت، الأردن</span>
                         <h4 class="text-base font-bold font-tajawal text-white mt-1">العلاج الطبيعي والاسترخاء</h4>
@@ -800,7 +834,7 @@
                         <div class="glass-card p-8 rounded-3xl relative border border-white/20 text-right">
                             <i class="fa-solid fa-quote-left absolute top-6 left-6 text-gold-300/30 text-5xl"></i>
                             <div class="flex items-center gap-4 mb-6">
-                                <img src="https://placehold.co/100x100/1e293b/ffffff?text=M" alt="العميل محمد" class="w-14 h-14 rounded-full object-cover border-2 border-gold-500">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=120" alt="العميل محمد" class="w-14 h-14 rounded-full object-cover border-2 border-gold-500">
                                 <div>
                                     <h4 class="font-bold text-slate-900 dark:text-white">م. محمد بني مصطفى</h4>
                                     <p class="text-xs text-gray-400">عجلون، الأردن</p>
@@ -823,7 +857,7 @@
                         <div class="glass-card p-8 rounded-3xl relative border border-white/20 text-right">
                             <i class="fa-solid fa-quote-left absolute top-6 left-6 text-gold-300/30 text-5xl"></i>
                             <div class="flex items-center gap-4 mb-6">
-                                <img src="https://placehold.co/100x100/1e293b/ffffff?text=A" alt="العميلة عائشة" class="w-14 h-14 rounded-full object-cover border-2 border-gold-500">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=120" alt="العميلة عائشة" class="w-14 h-14 rounded-full object-cover border-2 border-gold-500">
                                 <div>
                                     <h4 class="font-bold text-slate-900 dark:text-white">د. عائشة العتيبي</h4>
                                     <p class="text-xs text-gray-400">الرياض، السعودية</p>
@@ -846,7 +880,7 @@
                         <div class="glass-card p-8 rounded-3xl relative border border-white/20 text-right">
                             <i class="fa-solid fa-quote-left absolute top-6 left-6 text-gold-300/30 text-5xl"></i>
                             <div class="flex items-center gap-4 mb-6">
-                                <img src="https://placehold.co/100x100/1e293b/ffffff?text=F" alt="العميل فادي" class="w-14 h-14 rounded-full object-cover border-2 border-gold-500">
+                                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=120" alt="العميل فادي" class="w-14 h-14 rounded-full object-cover border-2 border-gold-500">
                                 <div>
                                     <h4 class="font-bold text-slate-900 dark:text-white">أ. فادي حداد</h4>
                                     <p class="text-xs text-gray-400">عمان، الأردن</p>
@@ -934,7 +968,7 @@
                 <!-- Blog Item 1 -->
                 <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
                     <div class="h-48 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?q=80&w=600" alt="قلعة عجلون وتاريخها العريق" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1610123598147-f632aa18b275?auto=format&fit=crop&q=70&w=350" alt="قلعة عجلون وتاريخها العريق" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <span class="absolute bottom-4 right-4 bg-slate-950 text-white text-xs font-bold px-3 py-1">تاريخ عجلون</span>
                     </div>
                     <div class="p-6 space-y-3">
@@ -946,7 +980,7 @@
                 <!-- Blog Item 2 -->
                 <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
                     <div class="h-48 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?q=80&w=600" alt="مسارات البتراء الفريدة" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1541432901042-2d8bd64b4a9b?auto=format&fit=crop&q=70&w=350" alt="مسارات البتراء الفريدة" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <span class="absolute bottom-4 right-4 bg-slate-950 text-white text-xs font-bold px-3 py-1">أسرار البتراء</span>
                     </div>
                     <div class="p-6 space-y-3">
@@ -958,7 +992,7 @@
                 <!-- Blog Item 3 -->
                 <div class="glass-card rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300">
                     <div class="h-48 overflow-hidden relative">
-                        <img src="https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?q=80&w=600" alt="تخييم في صحراء الأردن" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1501179691627-eeaa65ea017c?auto=format&fit=crop&q=70&w=350" alt="تخييم في صحراء الأردن" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                         <span class="absolute bottom-4 right-4 bg-slate-950 text-white text-xs font-bold px-3 py-1">نصائح مفيدة</span>
                     </div>
                     <div class="p-6 space-y-3">
@@ -1024,12 +1058,35 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-slate-700 dark:text-gray-300">عدد الأشخاص *</label>
-                                <input type="number" required min="1" max="50" placeholder="1" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none transition-all text-slate-700 dark:text-white">
+                                <input type="number" id="booking-people-input" required min="1" max="50" value="1" class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none transition-all text-slate-700 dark:text-white">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-center gap-2 pt-2">
+                                <input type="checkbox" id="booking-vip-toggle" class="w-4 h-4 text-gold-500 focus:ring-gold-500 border-gray-300 rounded">
+                                <label for="booking-vip-toggle" class="text-xs font-bold uppercase text-slate-700 dark:text-gray-300 cursor-pointer">ترقية إلى VIP (+20 دينار/شخص)</label>
+                            </div>
+                            <div class="flex items-center gap-2 pt-2">
+                                <input type="checkbox" id="booking-promo-toggle" class="w-4 h-4 text-gold-500 focus:ring-gold-500 border-gray-300 rounded">
+                                <label for="booking-promo-toggle" class="text-xs font-bold uppercase text-slate-700 dark:text-gray-300 cursor-pointer">تطبيق كود الخصم (خصم 25%)</label>
                             </div>
                         </div>
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider mb-2 text-slate-700 dark:text-gray-300">أي ملاحظات خاصة أو تفضيلات VIP؟</label>
                             <textarea rows="2" placeholder="مثال: غرف متصلة، سيارة دفع رباعي خاصة، تفضيلات صحية بالوجبات..." class="w-full px-4 py-3 bg-white/50 dark:bg-slate-900 border border-gray-300 dark:border-gray-800 rounded-xl focus:ring-2 focus:ring-gold-500 focus:outline-none transition-all"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Pricing Calculator Widget -->
+                    <div class="md:col-span-2 bg-gold-500/5 border border-gold-500/20 rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-center gap-4 mt-2">
+                        <div class="text-right">
+                            <h4 class="text-gold-500 font-bold text-xs uppercase tracking-wider mb-1">حساب التكلفة المبدئية التفاعلي</h4>
+                            <p class="text-[11px] text-slate-400">مبني على الباقة والترقيات والخصومات المحددة.</p>
+                        </div>
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-xs text-slate-400">المجموع الكلي:</span>
+                            <span id="booking-total-price" class="text-3xl font-black text-gold-500">0</span>
+                            <span class="text-sm font-bold text-gold-500">دينار أردني</span>
                         </div>
                     </div>
 
@@ -1216,6 +1273,167 @@
         <i class="fa-solid fa-arrow-up text-lg"></i>
     </button>
 
+    <!-- Floating Interactive "Smart Horizon Assistant" Travel Quiz Widget -->
+    <div id="quiz-widget-trigger" class="fixed bottom-24 right-6 z-40 hover:scale-110 transition-transform duration-300">
+        <button onclick="toggleQuizModal()" class="w-14 h-14 rounded-full bg-gradient-to-tr from-gold-600 to-amber-500 text-slate-950 flex items-center justify-center shadow-2xl relative">
+            <span class="absolute -top-1 -right-1 flex h-4.5 w-4.5">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-4.5 w-4.5 bg-emerald-500 border border-white text-[8px] text-white font-bold items-center justify-center">1</span>
+            </span>
+            <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+        </button>
+        <!-- Tooltip -->
+        <div class="absolute right-16 top-1/2 -translate-y-1/2 bg-slate-900/90 text-white text-xs py-2 px-3 rounded-xl whitespace-nowrap opacity-0 hover:opacity-100 transition-opacity duration-300 pointer-events-none border border-gold-500/20 font-semibold shadow">
+            مساعد الأفق الذكي ✨
+        </div>
+    </div>
+
+    <!-- Interactive Premium WhatsApp Chat Widget -->
+    <div id="whatsapp-chat-widget" class="fixed bottom-6 left-6 z-40 text-right">
+        <!-- Floating Button -->
+        <button onclick="toggleWhatsAppPopUp()" class="w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-2xl hover:scale-110 transition-transform duration-300 relative">
+            <span class="absolute -top-1 -left-1 flex h-3 w-3">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+            </span>
+            <i class="fa-brands fa-whatsapp text-3xl"></i>
+        </button>
+
+        <!-- Premium Chat Popup -->
+        <div id="whatsapp-popup" class="hidden absolute bottom-18 left-0 w-80 glass-card rounded-2xl border border-gray-100 dark:border-gray-800 shadow-2xl overflow-hidden transition-all duration-300 transform scale-95 origin-bottom-left">
+            <!-- Header -->
+            <div class="bg-gradient-to-r from-[#128C7E] to-[#25D366] p-4 text-white flex items-center gap-3">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100" alt="مستشار السفر" class="w-10 h-10 rounded-full object-cover border border-white">
+                    <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border border-white rounded-full"></span>
+                </div>
+                <div>
+                    <h4 class="text-xs font-bold font-tajawal">مستشار السفر بالأفق</h4>
+                    <p class="text-[10px] text-white/85">نشط الآن لمساعدتكم 🟢</p>
+                </div>
+            </div>
+            <!-- Body -->
+            <div class="p-4 bg-slate-50 dark:bg-slate-900 space-y-3">
+                <div class="bg-white dark:bg-slate-850 p-3 rounded-xl rounded-tr-none text-xs text-slate-700 dark:text-gray-200 shadow-sm leading-relaxed max-w-[85%] mr-auto">
+                    أهلاً بك في رحلات الأفق! كيف يمكنني مساعدتك اليوم في التخطيط لرحلتك المثالية؟ ✈️
+                </div>
+                <div class="text-[10px] text-gray-400">خيارات سريعة للمحادثة:</div>
+                <div class="space-y-2">
+                    <a href="https://wa.me/962791234567?text=أود%20الاستفسار%20عن%20عروض%20العائلات%20والباقات%20المتاحة" target="_blank" class="block w-full p-2.5 bg-white dark:bg-slate-800 text-[11px] font-semibold text-slate-800 dark:text-gray-100 hover:text-gold-500 rounded-lg text-right border border-gray-100 dark:border-gray-800 shadow-sm transition-colors">
+                        👨‍👩‍👧‍👦 استفسار عن عروض العائلات الكبيرة
+                    </a>
+                    <a href="https://wa.me/962791234567?text=أود%20تفصيل%20رحلة%20خاصة%20VIP%20حسب%20رغبتي" target="_blank" class="block w-full p-2.5 bg-white dark:bg-slate-800 text-[11px] font-semibold text-slate-800 dark:text-gray-100 hover:text-gold-500 rounded-lg text-right border border-gray-100 dark:border-gray-800 shadow-sm transition-colors">
+                        👑 تفصيل وتصميم باقة رحلة VIP خاصة
+                    </a>
+                    <a href="https://wa.me/962791234567?text=أرغب%20في%20معرفة%20باقات%20السياحة%20الخارجية%20العالمية" target="_blank" class="block w-full p-2.5 bg-white dark:bg-slate-800 text-[11px] font-semibold text-slate-800 dark:text-gray-100 hover:text-gold-500 rounded-lg text-right border border-gray-100 dark:border-gray-800 shadow-sm transition-colors">
+                        🌍 الاستفسار عن باقات السفر الخارجي
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Smart Assistant Quiz Dialog -->
+    <div id="quiz-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glassmorphism p-8 rounded-3xl max-w-lg w-full mx-6 border border-white/20 shadow-2xl relative text-right">
+            <!-- Close btn -->
+            <button onclick="toggleQuizModal()" class="absolute top-4 left-4 text-gray-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
+
+            <h3 class="text-xl font-bold font-tajawal text-gradient flex items-center gap-2 mb-2">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> مساعد الأفق الذكي للسفر
+            </h3>
+            <p class="text-xs text-gray-400 mb-6">أجب عن 3 أسئلة سريعة وسنحدد لك الوجهة المثالية لرحلتك القادمة!</p>
+
+            <!-- Quiz Steps Container -->
+            <div id="quiz-steps">
+                <!-- Step 1 -->
+                <div id="quiz-step-1" class="quiz-step">
+                    <h4 class="text-base font-bold text-slate-900 dark:text-white mb-4">1. ما هو نوع عطلتك المفضل؟</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="nextQuizStep(2, 'type', 'nature')" class="p-4 bg-white/5 dark:bg-slate-950 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gold-500 hover:bg-gold-500/5 text-right transition-all">
+                            <i class="fa-solid fa-tree text-gold-500 mb-2 block text-lg"></i>
+                            <span class="text-sm font-bold block text-slate-800 dark:text-gray-200">طبيعة واستجمام</span>
+                        </button>
+                        <button onclick="nextQuizStep(2, 'type', 'culture')" class="p-4 bg-white/5 dark:bg-slate-950 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gold-500 hover:bg-gold-500/5 text-right transition-all">
+                            <i class="fa-solid fa-landmark text-gold-500 mb-2 block text-lg"></i>
+                            <span class="text-sm font-bold block text-slate-800 dark:text-gray-200">تاريخ وآثار عريقة</span>
+                        </button>
+                        <button onclick="nextQuizStep(2, 'type', 'adventure')" class="p-4 bg-white/5 dark:bg-slate-950 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gold-500 hover:bg-gold-500/5 text-right transition-all">
+                            <i class="fa-solid fa-campground text-gold-500 mb-2 block text-lg"></i>
+                            <span class="text-sm font-bold block text-slate-800 dark:text-gray-200">مغامرة وتخييم</span>
+                        </button>
+                        <button onclick="nextQuizStep(2, 'type', 'luxury')" class="p-4 bg-white/5 dark:bg-slate-950 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gold-500 hover:bg-gold-500/5 text-right transition-all">
+                            <i class="fa-solid fa-gem text-gold-500 mb-2 block text-lg"></i>
+                            <span class="text-sm font-bold block text-slate-800 dark:text-gray-200">تسوق وحداثة فاخرة</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div id="quiz-step-2" class="quiz-step hidden">
+                    <h4 class="text-base font-bold text-slate-900 dark:text-white mb-4">2. كم هي المدة المفضلة لرحلتك؟</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="nextQuizStep(3, 'duration', 'short')" class="p-4 bg-white/5 dark:bg-slate-950 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gold-500 hover:bg-gold-500/5 text-right transition-all">
+                            <i class="fa-solid fa-calendar-day text-gold-500 mb-2 block text-lg"></i>
+                            <span class="text-sm font-bold block text-slate-800 dark:text-gray-200">يوم واحد سريع</span>
+                        </button>
+                        <button onclick="nextQuizStep(3, 'duration', 'weekend')" class="p-4 bg-white/5 dark:bg-slate-950 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gold-500 hover:bg-gold-500/5 text-right transition-all">
+                            <i class="fa-solid fa-calendar-week text-gold-500 mb-2 block text-lg"></i>
+                            <span class="text-sm font-bold block text-slate-800 dark:text-gray-200">عطلة نهاية الأسبوع (يومين)</span>
+                        </button>
+                        <button onclick="nextQuizStep(3, 'duration', 'long')" class="p-4 bg-white/5 dark:bg-slate-950 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gold-500 hover:bg-gold-500/5 text-right transition-all">
+                            <i class="fa-solid fa-plane-up text-gold-500 mb-2 block text-lg"></i>
+                            <span class="text-sm font-bold block text-slate-800 dark:text-gray-200">برنامج سياحي طويل (5-6 أيام)</span>
+                        </button>
+                        <button onclick="quizStepBack(1)" class="p-4 bg-gray-100 dark:bg-slate-900 border border-transparent rounded-xl text-center text-xs font-bold text-slate-500 hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-arrow-right"></i> رجوع للسابق
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div id="quiz-step-3" class="quiz-step hidden">
+                    <h4 class="text-base font-bold text-slate-900 dark:text-white mb-4">3. أين تود قضاء هذه الرحلة؟</h4>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="finishQuiz('domestic')" class="p-4 bg-white/5 dark:bg-slate-950 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gold-500 hover:bg-gold-500/5 text-right transition-all">
+                            <i class="fa-solid fa-map-location text-gold-500 mb-2 block text-lg"></i>
+                            <span class="text-sm font-bold block text-slate-800 dark:text-gray-200">داخل الأردن الساحر</span>
+                        </button>
+                        <button onclick="finishQuiz('intl')" class="p-4 bg-white/5 dark:bg-slate-950 border border-gray-200 dark:border-gray-800 rounded-xl hover:border-gold-500 hover:bg-gold-500/5 text-right transition-all">
+                            <i class="fa-solid fa-earth-americas text-gold-500 mb-2 block text-lg"></i>
+                            <span class="text-sm font-bold block text-slate-800 dark:text-gray-200">وجهات عالمية خارجية</span>
+                        </button>
+                        <button onclick="quizStepBack(2)" class="col-span-2 p-3 bg-gray-100 dark:bg-slate-900 border border-transparent rounded-xl text-center text-xs font-bold text-slate-500 hover:bg-gray-200 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-arrow-right"></i> رجوع للسابق
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Step -->
+                <div id="quiz-result-step" class="quiz-step hidden space-y-4">
+                    <div class="w-16 h-16 bg-gold-500/10 text-gold-500 rounded-full flex items-center justify-center text-3xl mx-auto mb-2">
+                        <i class="fa-solid fa-gift animate-bounce"></i>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">الوجهة المثالية المقترحة لك هي:</h4>
+                        <p id="quiz-recommendation-title" class="text-2xl font-black text-gold-500 mt-2">وادي رم: تخييم المريخ</p>
+                        <p id="quiz-recommendation-desc" class="text-xs text-gray-500 dark:text-gray-400 mt-2 max-w-sm mx-auto leading-relaxed">
+                            استمتع بليلة خيالية تحت النجوم ورمال الصحراء الذهبية الحمراء مع ركوب الجمال وسيارات الدفع الرباعي.
+                        </p>
+                    </div>
+                    <div class="flex gap-3 pt-4">
+                        <button onclick="bookQuizRecommendation()" class="w-full py-3 bg-gradient-to-r from-gold-600 to-gold-400 text-slate-950 font-bold rounded-xl text-sm hover:scale-105 active:scale-95 transition-all text-center">
+                            <i class="fa-regular fa-calendar-check ml-1"></i> احجز هذه الرحلة الآن
+                        </button>
+                        <button onclick="restartQuiz()" class="w-full py-3 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold rounded-xl text-sm hover:bg-slate-300 transition-all text-center">
+                            إعادة الاختبار
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Custom Success Glassmorphism Notification Toast -->
     <div id="success-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
         <div class="glassmorphism p-8 rounded-3xl max-w-sm w-full mx-6 text-center border border-white/20 shadow-2xl transform scale-90 transition-transform duration-300">
@@ -1228,6 +1446,31 @@
         </div>
     </div>
 
+    <!-- Tour Itinerary Dynamic Modal -->
+    <div id="itinerary-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="glassmorphism p-8 rounded-3xl max-w-xl w-full mx-6 border border-white/20 shadow-2xl relative text-right">
+            <!-- Close btn -->
+            <button onclick="closeItineraryModal()" class="absolute top-4 left-4 text-gray-400 hover:text-red-500 transition-colors"><i class="fa-solid fa-xmark text-xl"></i></button>
+
+            <h3 id="itinerary-title" class="text-2xl font-bold font-tajawal text-gradient mb-2">اسم برنامج الرحلة</h3>
+            <div id="itinerary-tag" class="inline-block px-3 py-1 bg-gold-500/10 text-gold-500 text-xs rounded-full font-bold mb-6">تفاصيل العرض</div>
+
+            <!-- Timeline steps wrapper -->
+            <div id="itinerary-timeline" class="space-y-4 border-r border-gold-500/30 pr-4 mr-2">
+                <!-- Days will be dynamically loaded here -->
+            </div>
+
+            <div class="mt-8 flex gap-3">
+                <button id="itinerary-book-btn" class="w-full py-3 bg-gradient-to-r from-gold-600 to-gold-400 text-slate-950 font-bold rounded-xl text-sm hover:scale-105 active:scale-95 transition-all text-center">
+                    احجز هذا البرنامج الآن
+                </button>
+                <button onclick="closeItineraryModal()" class="w-full py-3 bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold rounded-xl text-sm hover:bg-slate-300 transition-all text-center">
+                    إغلاق التفاصيل
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Gallery Lightbox Modal -->
     <div id="lightbox" class="fixed inset-0 z-50 flex items-center justify-center bg-black/95 opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeLightbox()">
         <button class="absolute top-6 right-6 text-white text-3xl hover:text-red-500 focus:outline-none" onclick="closeLightbox()"><i class="fa-solid fa-xmark"></i></button>
@@ -1235,7 +1478,7 @@
         <button class="absolute right-6 text-white text-4xl hover:text-gold-500 focus:outline-none" onclick="event.stopPropagation(); changeLightboxImage(1)"><i class="fa-solid fa-chevron-right"></i></button>
         
         <div class="max-w-4xl max-h-[80vh] px-4 flex flex-col items-center" onclick="event.stopPropagation()">
-            <img id="lightbox-img" src="" alt="معرض الصور" class="max-w-full max-h-[75vh] object-contain rounded-2xl border border-white/10 shadow-2xl">
+            <img id="lightbox-img" src="data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 1 1'%2F%3E" alt="معرض الصور" class="max-w-full max-h-[75vh] object-contain rounded-2xl border border-white/10 shadow-2xl">
             <p id="lightbox-caption" class="text-white text-sm mt-4 font-light text-center"></p>
         </div>
     </div>
@@ -1317,9 +1560,36 @@
         closeMenuBtn.addEventListener('click', closeMobileMenu);
         mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
 
-        // Tour Baskets Tab Filters
+        // Tour Baskets Tab Filters & Search Logic
         const filterButtons = document.querySelectorAll('#tours-filter button');
         const tourCards = document.querySelectorAll('.tour-card');
+        const searchInput = document.getElementById('tours-search-input');
+        const searchClear = document.getElementById('tours-search-clear');
+        let currentFilterValue = 'all';
+
+        function applySearchAndFilter() {
+            const query = searchInput.value.toLowerCase().trim();
+            if (query !== '') {
+                searchClear.classList.remove('hidden');
+            } else {
+                searchClear.classList.add('hidden');
+            }
+
+            tourCards.forEach(card => {
+                const categories = card.getAttribute('data-category').split(', ');
+                const title = card.querySelector('h3').innerText.toLowerCase();
+                const description = card.querySelector('p').innerText.toLowerCase();
+
+                const matchesCategory = (currentFilterValue === 'all' || categories.includes(currentFilterValue));
+                const matchesQuery = (title.includes(query) || description.includes(query));
+
+                if (matchesCategory && matchesQuery) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
 
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1330,18 +1600,68 @@
                 // Set active style
                 btn.className = "tab-btn px-5 py-2.5 rounded-full text-xs font-bold transition-all duration-300 bg-gold-500 text-white shadow-lg";
 
-                const filterValue = btn.getAttribute('data-filter');
-
-                tourCards.forEach(card => {
-                    const categories = card.getAttribute('data-category').split(', ');
-                    if (filterValue === 'all' || categories.includes(filterValue)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                currentFilterValue = btn.getAttribute('data-filter');
+                applySearchAndFilter();
             });
         });
+
+        searchInput.addEventListener('input', applySearchAndFilter);
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            applySearchAndFilter();
+        });
+
+        // Booking Price Calculator Logic
+        const packagePrices = {
+            'عجلون': 35,
+            'جرش': 40,
+            'البحر الميت': 55,
+            'البتراء': 95,
+            'وادي رم': 85,
+            'العقبة': 75,
+            'تركيا': 450,
+            'دبي': 390,
+            'مصر': 320,
+            'أخرى': 100 // Custom starting price
+        };
+
+        const bookingTourSelect = document.getElementById('booking-tour-select');
+        const bookingPeopleInput = document.getElementById('booking-people-input');
+        const bookingVipToggle = document.getElementById('booking-vip-toggle');
+        const bookingPromoToggle = document.getElementById('booking-promo-toggle');
+        const bookingTotalPriceEl = document.getElementById('booking-total-price');
+
+        function updateCalculatedPrice() {
+            const selectedVal = bookingTourSelect.value;
+            if (!selectedVal) {
+                bookingTotalPriceEl.innerText = '0';
+                return;
+            }
+
+            let basePrice = packagePrices[selectedVal] || 0;
+            let peopleCount = parseInt(bookingPeopleInput.value) || 1;
+            if (peopleCount < 1) peopleCount = 1;
+
+            let perPersonPrice = basePrice;
+            if (bookingVipToggle.checked) {
+                perPersonPrice += 20; // VIP Upgrade per person
+            }
+
+            let total = perPersonPrice * peopleCount;
+
+            if (bookingPromoToggle.checked) {
+                total = total * 0.75; // 25% Off
+            }
+
+            bookingTotalPriceEl.innerText = Math.round(total);
+        }
+
+        if (bookingTourSelect) {
+            bookingTourSelect.addEventListener('change', updateCalculatedPrice);
+            bookingPeopleInput.addEventListener('input', updateCalculatedPrice);
+            bookingVipToggle.addEventListener('change', updateCalculatedPrice);
+            bookingPromoToggle.addEventListener('change', updateCalculatedPrice);
+        }
 
         // Booking Prefill Utility
         function prefillBooking(tourName) {
@@ -1349,11 +1669,20 @@
             
             // Search for option that contains the string
             for (let i = 0; i < selectElement.options.length; i++) {
-                if (selectElement.options[i].text.includes(tourName.split(' - ')[0])) {
+                if (selectElement.options[i].text.includes(tourName.split(' - ')[0]) || selectElement.options[i].value.includes(tourName.split(' - ')[0])) {
                     selectElement.selectedIndex = i;
                     break;
                 }
             }
+
+            // Auto toggle discount if custom promo package chosen
+            if (tourName.includes('خصم 25%')) {
+                bookingPromoToggle.checked = true;
+            } else {
+                bookingPromoToggle.checked = false;
+            }
+
+            updateCalculatedPrice();
             
             // Smooth scroll down to the form
             document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
@@ -1440,6 +1769,226 @@
             const successModal = document.getElementById('success-modal');
             successModal.classList.add('opacity-0', 'pointer-events-none');
             successModal.firstElementChild.classList.add('scale-90');
+        }
+
+        // Smart Horizon Assistant Quiz Logic
+        let quizAnswers = {};
+
+        function toggleQuizModal() {
+            const quizModal = document.getElementById('quiz-modal');
+            if (quizModal.classList.contains('opacity-0')) {
+                quizModal.classList.remove('opacity-0', 'pointer-events-none');
+                restartQuiz();
+            } else {
+                quizModal.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        function nextQuizStep(stepNum, key, value) {
+            quizAnswers[key] = value;
+
+            // Hide all steps
+            document.querySelectorAll('.quiz-step').forEach(step => step.classList.add('hidden'));
+
+            // Show next step
+            document.getElementById(`quiz-step-${stepNum}`).classList.remove('hidden');
+        }
+
+        function quizStepBack(stepNum) {
+            document.querySelectorAll('.quiz-step').forEach(step => step.classList.add('hidden'));
+            document.getElementById(`quiz-step-${stepNum}`).classList.remove('hidden');
+        }
+
+        function restartQuiz() {
+            quizAnswers = {};
+            document.querySelectorAll('.quiz-step').forEach(step => step.classList.add('hidden'));
+            document.getElementById('quiz-step-1').classList.remove('hidden');
+        }
+
+        const recommendations = {
+            'nature_short_domestic': { title: 'جولة عجلون ومحمية الغابات', desc: 'استمتع بنهار هادئ وجميل في أحضان غابات عجلون الكثيفة والجميلة مع طقس ممتع وجولات قلعة الربض.' },
+            'nature_weekend_domestic': { title: 'البحر الميت والاستجمام الطبيعي', desc: 'اقضِ عطلة نهاية أسبوع مريحة في منتجعات البحر الميت مع الطفو والاستجمام بمياه البحر الدافئة الغنية بالمعادن.' },
+            'nature_long_domestic': { title: 'البحر الميت والاستجمام الطبيعي', desc: 'استمتع برحلة استرخاء طبيعي متكاملة تشمل البحر الميت وحمامات ماعين الدافئة.' },
+            'nature_long_intl': { title: 'سحر إسطنبول وبورصة', desc: 'سافر معنا إلى جبال بورصة الخضراء وبحيرة سبانجا والتمتع بربيع وخريف تركيا الفاخر.' },
+
+            'culture_short_domestic': { title: 'جرش والمدينة الأثرية', desc: 'اكتشف الأعمدة الرومانية والمدرج التاريخي الشامخ في جرش الأثرية في جولة يوم واحد مليئة بالمعرفة.' },
+            'culture_weekend_domestic': { title: 'البتراء: رحلة المدينة الوردية', desc: 'انغمس في حضارة الأنباط الخالدة من خلال جولة شاملة للسيق والخزنة والمذبح والدير الأثري.' },
+            'culture_long_domestic': { title: 'البتراء: رحلة المدينة الوردية', desc: 'اكتشف مثلث الأردن الذهبي: البتراء، رم والعقبة لتعيش تجربة تاريخية متكاملة.' },
+            'culture_long_intl': { title: 'تاريخ وحضارة مصر الفرعونية', desc: 'زر أهرامات الجيزة الخالدة والمتحف المصري واستمتع بسحر نهر النيل وعبق التاريخ القاهري.' },
+
+            'adventure_short_domestic': { title: 'جولة عجلون ومحمية الغابات', desc: 'عيش مغامرة تسلق ومشي مميزة بين أشجار البلوط والبطم بداخل محمية غابات عجلون الطبيعية.' },
+            'adventure_weekend_domestic': { title: 'وادي رم: تجربة تخييم المريخ', desc: 'مغامرتك المفضلة تبدأ من رمال وادي رم الحمراء مع جولات الدفع الرباعي والمبيت الفاخر في خيمة فقاعية.' },
+            'adventure_long_domestic': { title: 'وادي رم: تجربة تخييم المريخ', desc: 'برنامج حافل يشمل التخييم بـ وادي رم، جولات البتراء الأثرية والمغامرات المائية بخليج العقبة.' },
+            'adventure_long_intl': { title: 'سحر إسطنبول وبورصة', desc: 'استكشف ركوب التلفريك جبل أولوداغ وأنشطة المغامرة في الطبيعة التركية الساحرة.' },
+
+            'luxury_short_domestic': { title: 'البحر الميت والاستجمام الطبيعي', desc: 'يوم VIP كامل في أفخم منتجعات البحر الميت الـ 5 نجوم مع غداء فاخر ودخول خاص للبرك والشواطئ.' },
+            'luxury_weekend_domestic': { title: 'وادي رم: تجربة تخييم المريخ', desc: 'تخييم ملكي VIP في أجنحة المخيمات الفاخرة ذات الإطلالات البانورامية الشاملة مع عشاء زرب فاخر.' },
+            'luxury_long_domestic': { title: 'البتراء: رحلة المدينة الوردية', desc: 'جولة ملكية مخصصة تشمل فنادق خمس نجوم وتنقلات VIP خاصة للبتراء ووادي رم ومحمية ضانا.' },
+            'luxury_long_intl': { title: 'دبي: عاصمة الحداثة والمستقبل', desc: 'باقة الفخامة لزيارة برج خليفة، نافورة دبي الراقصة، جولات اليخوت الخاصة، والتسوق الملكي.' }
+        };
+
+        function finishQuiz(region) {
+            quizAnswers['region'] = region;
+
+            const key = `${quizAnswers.type}_${quizAnswers.duration}_${quizAnswers.region}`;
+            const fallbackKey = `${quizAnswers.type}_long_intl`; // fallback
+
+            const recommendation = recommendations[key] || recommendations[fallbackKey] || {
+                title: 'وادي رم: تجربة تخييم المريخ',
+                desc: 'مغامرتك المفضلة تبدأ من رمال وادي رم الحمراء مع جولات الدفع الرباعي والمبيت الفاخر في خيمة فقاعية تحت النجوم.'
+            };
+
+            document.getElementById('quiz-recommendation-title').innerText = recommendation.title;
+            document.getElementById('quiz-recommendation-desc').innerText = recommendation.desc;
+
+            // Hide steps, show result
+            document.querySelectorAll('.quiz-step').forEach(step => step.classList.add('hidden'));
+            document.getElementById('quiz-result-step').classList.remove('hidden');
+        }
+
+        function bookQuizRecommendation() {
+            const recommendedTitle = document.getElementById('quiz-recommendation-title').innerText;
+            prefillBooking(recommendedTitle);
+            toggleQuizModal();
+        }
+
+        // WhatsApp Interactive PopUp logic
+        function toggleWhatsAppPopUp() {
+            const popup = document.getElementById('whatsapp-popup');
+            if (popup.classList.contains('hidden')) {
+                popup.classList.remove('hidden');
+                setTimeout(() => {
+                    popup.classList.remove('scale-95', 'opacity-0');
+                }, 10);
+            } else {
+                popup.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    popup.classList.add('hidden');
+                }, 150);
+            }
+        }
+
+        // Tour Itinerary Modals Data and Handler
+        const itineraries = {
+            'عجلون': {
+                title: 'جولة عجلون ومحمية الغابات الخضراء',
+                tag: 'رحلة يوم كامل - عجلون',
+                steps: [
+                    { title: 'الصباح (08:30)', desc: 'الانطلاق من نقطة التجمع بحافلات الأفق السياحية والتوجه نحو غابات عجلون الكثيفة.' },
+                    { title: 'الظهيرة (12:00)', desc: 'زيارة قلعة عجلون التاريخية (قلعة الربض) الأثرية واستكشاف أبراجها الشامخة.' },
+                    { title: 'الغداء (14:30)', desc: 'تناول وجبة غداء ريفية تراثية أصيلة بقلب الطبيعة وسط غابات السنديان الخضراء.' }
+                ]
+            },
+            'جرش': {
+                title: 'جرش والمدينة الأثرية العريقة',
+                tag: 'رحلة يوم كامل - جرش',
+                steps: [
+                    { title: 'الصباح (09:00)', desc: 'الانطلاق نحو مدينة جرش لزيارة البوابات الأثرية وشارع الأعمدة العريق.' },
+                    { title: 'الظهيرة (12:30)', desc: 'جولة استكشافية برفقة دليلنا السياحي المرخص لساحة البيضاوي والمدرج الجنوبي.' },
+                    { title: 'العصر (15:30)', desc: 'غداء بوفيه مفتوح في مطعم سياحي مميز مع وقت للتسوق والتقاط الصور التذكارية.' }
+                ]
+            },
+            'البحر الميت': {
+                title: 'البحر الميت والاستجمام والطفو',
+                tag: 'رحلة يوم كامل - البحر الميت',
+                steps: [
+                    { title: 'الصباح (09:00)', desc: 'التوجه إلى البحر الميت (أخفض بقعة في العالم) ودخول أفخم المنتجعات الـ 5 نجوم.' },
+                    { title: 'الظهيرة (12:00)', desc: 'وقت حر للطفو في المياه المالحة الصحية وتجربة طين البحر الميت العلاجي.' },
+                    { title: 'العصر (15:00)', desc: 'تناول بوفيه الغداء والاسترخاء بجانب المسابح والتمتع بالطقس الرائع.' }
+                ]
+            },
+            'البتراء': {
+                title: 'البتراء: رحلة المدينة الوردية',
+                tag: 'رحلة يوم كامل - البتراء',
+                steps: [
+                    { title: 'الصباح (07:00)', desc: 'الانطلاق الباكر من عمان أو عجلون للوصول إلى جنوب الأردن وبدء المغامرة.' },
+                    { title: 'الظهيرة (11:00)', desc: 'دخول المدينة الوردية عبر السيق العظيم والوصول إلى لوحة الخزنة المذهلة.' },
+                    { title: 'العصر (14:30)', desc: 'استكمال المسار للمدرج والمذبح وتناول وجبة غداء فاخرة داخل الموقع الأثري.' }
+                ]
+            },
+            'وادي رم': {
+                title: 'وادي رم: تجربة تخييم المريخ',
+                tag: 'برنامج يومان / ليلة واحدة - وادي رم',
+                steps: [
+                    { title: 'اليوم الأول - العصر', desc: 'الوصول لرم، جولة جيب دفع رباعي 4x4 لمشاهدة غروب الشمس الساحر وسط الرمال.' },
+                    { title: 'اليوم الأول - المساء', desc: 'تناول عشاء الزرب البدوي الفاخر، وحفل رصد النجوم والمجرات الفلكية بالتلسكوبات.' },
+                    { title: 'اليوم الثاني - الصباح', desc: 'مشاهدة شروق الشمس، وجبة إفطار بدوي شهي، ووقت حر لركوب الجمال قبل المغادرة.' }
+                ]
+            },
+            'العقبة': {
+                title: 'العقبة وثغر الأردن الباسم',
+                tag: 'برنامج يومان / ليلة واحدة - العقبة',
+                steps: [
+                    { title: 'اليوم الأول - الصباح', desc: 'الانطلاق من الجنوب نحو شواطئ العقبة الدافئة وتسجيل الدخول بالفندق.' },
+                    { title: 'اليوم الأول - العصر', desc: 'رحلة بحرية بمركب زجاجي فاخر مع السباحة ومشاهدة المرجان والأسماك الملونة.' },
+                    { title: 'اليوم الثاني - وقت حر', desc: 'وقت للتسوق بالمنطقة الحرة أو الغوص والتمتع بوجبة الغداء السمكية الفاخرة.' }
+                ]
+            },
+            'تركيا': {
+                title: 'سحر إسطنبول وبورصة الخضراء',
+                tag: 'باقة 6 أيام / 5 ليالٍ - تركيا',
+                steps: [
+                    { title: 'الأيام 1 - 2', desc: 'الاستقبال بالمطار، جولة استكشافية لجامع آيا صوفيا، قصر توبكابي، والجراند بازار.' },
+                    { title: 'الأيام 3 - 4', desc: 'رحلة ليوم كامل إلى مدينة بورصة الخضراء، ركوب التلفريك، وزيارة الشجرة المعمرة.' },
+                    { title: 'الأيام 5 - 6', desc: 'سهرة البوسفور البحرية الفاخرة، جولة تسوق في إستنية بارك ثم الانتقال للمطار للعودة.' }
+                ]
+            },
+            'دبي': {
+                title: 'دبي عاصمة المستقبل والحداثة',
+                tag: 'باقة 5 أيام / 4 ليالٍ - دبي',
+                steps: [
+                    { title: 'الأيام 1 - 2', desc: 'الوصول، زيارة برج خليفة والصعود لأعلى القمة، ومشاهدة عرض النافورات الراقصة.' },
+                    { title: 'الأيام 3 - 4', desc: 'مغامرة سفاري الصحراء بسيارات لاندكروزر الفاخرة، جولة باليخت الخاص في مارينا دبي.' },
+                    { title: 'اليوم 5', desc: 'وقت حر للتسوق في دبي مول ثم التوجه إلى مطار دبي الدولي للعودة للوطن.' }
+                ]
+            },
+            'مصر': {
+                title: 'تاريخ وحضارة مصر الفرعونية الخالدة',
+                tag: 'باقة 5 أيام / 4 ليالٍ - القاهرة',
+                steps: [
+                    { title: 'الأيام 1 - 2', desc: 'الاستقبال، جولة شاملة لأهرامات الجيزة العظيمة، أبو الهول، والمتحف المصري الكبير.' },
+                    { title: 'الأيام 3 - 4', desc: 'زيارة خان الخليلي وشارع المعز الأثري، والتمتع برحلة نيلية وعشاء على باخرة 5 نجوم.' },
+                    { title: 'اليوم 5', desc: 'رحلة تسوق وشراء التحف والهدايا التذكارية التراثية والتوجه إلى المطار للعودة.' }
+                ]
+            }
+        };
+
+        function openItineraryModal(tourKey) {
+            const data = itineraries[tourKey];
+            if (!data) return;
+
+            document.getElementById('itinerary-title').innerText = data.title;
+            document.getElementById('itinerary-tag').innerText = data.tag;
+
+            const timeline = document.getElementById('itinerary-timeline');
+            timeline.innerHTML = ''; // clear
+
+            data.steps.forEach(step => {
+                const stepHTML = `
+                    <div class="relative pb-2">
+                        <div class="flex items-center gap-2 mb-1">
+                            <span class="w-3 h-3 rounded-full bg-gold-500 border border-white absolute -right-1.5 mt-0.5"></span>
+                            <h4 class="font-bold text-sm text-gold-500 mr-2">${step.title}</h4>
+                        </div>
+                        <p class="text-xs text-gray-600 dark:text-gray-300 mr-2 leading-relaxed">${step.desc}</p>
+                    </div>
+                `;
+                timeline.innerHTML += stepHTML;
+            });
+
+            // Set book button action
+            document.getElementById('itinerary-book-btn').onclick = () => {
+                prefillBooking(data.title);
+                closeItineraryModal();
+            };
+
+            const modal = document.getElementById('itinerary-modal');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function closeItineraryModal() {
+            const modal = document.getElementById('itinerary-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
         }
 
         // FAQ Accordion logic
